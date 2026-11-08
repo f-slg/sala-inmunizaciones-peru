@@ -39,7 +39,7 @@
     "reglas_verificadas": 34,
     "otras_reglas": "Condicionales o revision clinica; no se automatiza elegibilidad"
   },
-  "portabilidad": "Version 0.2.0: comprobacion local Linux OK; matriz GitHub Actions pendiente. Version 0.1.0 previamente comprobada en los tres sistemas.",
+  "portabilidad": "Version 0.2.0 comprobada localmente en Linux y en GitHub Actions en Linux, Windows y macOS.",
   "fuentes_oficiales": [
     {
       "url": "https://cdn.www.gob.pe/uploads/document/file/10154198/8265031-nts-n-246-minsa-digiesp-2026-parte-1.pdf?v=1781371017",
@@ -93,5 +93,33 @@
     "ubigeos_cartografia": 1891,
     "hojas_plantilla_integral": 23,
     "validaciones_plantilla_integral": 47
+  },
+  "github_actions": {
+    "url": "https://github.com/f-slg/sala-inmunizaciones-peru/actions/runs/42482417805",
+    "commit_verificado": "0534f358b5eab7576e9afa65b93b1cdc1c4f0472",
+    "R": "4.6.2",
+    "resultados": {
+      "Linux": {
+        "estado": "success",
+        "aprobadas": 139,
+        "fallos": 0,
+        "advertencias": 0,
+        "omitidas": 0
+      },
+      "Windows": {
+        "estado": "success",
+        "aprobadas": 139,
+        "fallos": 0,
+        "advertencias": 0,
+        "omitidas": 0
+      },
+      "macOS": {
+        "estado": "success",
+        "aprobadas": 139,
+        "fallos": 0,
+        "advertencias": 0,
+        "omitidas": 0
+      }
+    }
   }
 }

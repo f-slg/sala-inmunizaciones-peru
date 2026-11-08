@@ -155,7 +155,7 @@ avisará si no dispone de su geometría; nunca lo ubicará sobre otro distrito.
 ## Diccionario y listas desplegables
 
 [Diccionario_variables.xlsx](entregables/Diccionario_variables.xlsx) documenta
-**96 campos por hoja**: definición, tipo, unidad, obligatoriedad, ejemplos y
+**96 entradas de variables, identificadas por hoja**: definición, tipo, unidad, obligatoriedad, ejemplos y
 valores permitidos. La misma información está dentro de cada plantilla, en la
 hoja `diccionario`, y en **Norma** dentro de la aplicación.
 
@@ -451,11 +451,11 @@ entrega el catálogo 2026 y no reproduce automáticamente calendarios histórico
 
 ## Verificación
 
-**Versión 0.2.0:** comprobación local en Linux con R 4.5.2 y 139
-comprobaciones aprobadas, sin fallos, advertencias ni omisiones. `R CMD check`: OK.
-La matriz de esta actualización se ejecuta al publicar.
-La versión 0.1.0 ya aprobó Linux, Windows y macOS con R 4.6.2
-([ejecución anterior](https://github.com/f-slg/sala-inmunizaciones-peru/actions/runs/42478929001)).
+**Versión 0.2.0, comprobada el 8 de noviembre de 2026:** Linux, Windows y
+macOS aprobaron la comprobación del paquete con **R 4.6.2 y 139 comprobaciones
+por sistema**, sin fallos, advertencias de pruebas ni omisiones.
+[Ver la ejecución](https://github.com/f-slg/sala-inmunizaciones-peru/actions/runs/42482417805).
+La comprobación local adicional con R 4.5.2 en Linux terminó con `R CMD check`: OK.
 Estos resultados no certifican elegibilidad clínica.
 
 
