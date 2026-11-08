@@ -454,6 +454,11 @@ Para cuestiones de exposición de información consulte [SECURITY.md](SECURITY.m
 El estado de las comprobaciones multiplataforma se consulta en
 [GitHub Actions](https://github.com/f-slg/sala-inmunizaciones-peru/actions).
 Las capturas incluidas son de Linux; el badge informa el estado del flujo remoto.
+En Windows, el flujo reutiliza R preinstalado en la imagen de GitHub y registra
+su versión, sin descargar Ghostscript para una comprobación sin manual PDF.
+Esto utiliza las opciones documentadas de
+[setup-r](https://github.com/r-lib/actions/tree/v2/setup-r) y el
+[inventario del runner](https://github.com/actions/runner-images/blob/main/images/windows/Windows2025-Readme.md).
 
 ## Autor y licencia
 
