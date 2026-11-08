@@ -395,6 +395,14 @@ entrega el catálogo 2026 y no reproduce automáticamente calendarios histórico
 
 ## Verificación
 
+**Resultado comprobado el 8 de noviembre de 2026:** Linux, Windows y macOS
+aprobaron la comprobación del paquete con **R 4.6.2 y 97 comprobaciones por sistema**,
+sin fallos, advertencias de pruebas ni omisiones.
+[Ver la ejecución](https://github.com/f-slg/sala-inmunizaciones-peru/actions/runs/42478929001).
+La comprobación local adicional se realizó con R 4.5.2 en Linux. El badge refleja
+el estado del flujo; estos resultados no certifican elegibilidad clínica.
+
+
 ```r
 pkgload::load_all(".")
 testthat::test_local(".")

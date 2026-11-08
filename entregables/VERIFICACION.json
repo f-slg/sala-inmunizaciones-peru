@@ -28,7 +28,7 @@
     "reglas_verificadas": 34,
     "otras_reglas": "Condicionales o revision clinica; no se automatiza elegibilidad"
   },
-  "portabilidad": "CI configurada para Linux, Windows y macOS. Windows y macOS no ejecutados en esta sesion.",
+  "portabilidad": "Linux comprobado localmente; Linux, Windows y macOS comprobados en GitHub Actions con R 4.6.2.",
   "fuentes_oficiales": [
     {
       "url": "https://cdn.www.gob.pe/uploads/document/file/10154198/8265031-nts-n-246-minsa-digiesp-2026-parte-1.pdf?v=1781371017",
@@ -47,5 +47,33 @@
     "proteccion_git": "Archivos privados ignorados; cuatro libros de distribucion permitidos",
     "datos_publicados": "Valores del libro iguales al generador simulado",
     "credenciales_y_rutas_personales": "Sin coincidencias en archivos preparados"
+  },
+  "github_actions": {
+    "url": "https://github.com/f-slg/sala-inmunizaciones-peru/actions/runs/42478929001",
+    "commit_verificado": "a63a3a2d6a8ce360fda23b613696c707bc8b950c",
+    "R": "4.6.2",
+    "resultados": {
+      "Linux": {
+        "estado": "success",
+        "aprobadas": 97,
+        "fallos": 0,
+        "advertencias": 0,
+        "omitidas": 0
+      },
+      "Windows": {
+        "estado": "success",
+        "aprobadas": 97,
+        "fallos": 0,
+        "advertencias": 0,
+        "omitidas": 0
+      },
+      "macOS": {
+        "estado": "success",
+        "aprobadas": 97,
+        "fallos": 0,
+        "advertencias": 0,
+        "omitidas": 0
+      }
+    }
   }
 }
