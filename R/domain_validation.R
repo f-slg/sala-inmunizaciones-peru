@@ -13,6 +13,7 @@ validate_dataset <- function(data, catalog=load_catalog()) {
   if (any(issues$nivel=="Error")) return(issues)
   numeric_fields <- list(poblacion=c("anio","poblacion"),vacunacion=c("anio","mes","dosis"),
     programacion=c("anio","poblacion_elegible","meta","recuperacion","perdida","reserva_dosis","transito_dosis","dias_horizonte","dias_reposicion"),
+    plan_mejora="avance",
     consumo=c("anio","mes","dosis_consumidas","dias_observados","dias_sin_stock"),
     presentaciones=c("dosis_frasco","volumen_cm3_dosis","jeringas_dosis","diluyentes_frasco","jeringas_reconstitucion_frasco","capacidad_caja"),
     inventario="saldo_dosis",movimientos="dosis",cadena_frio=c("capacidad_litros","ocupacion_otros_litros"))
@@ -101,6 +102,8 @@ validate_dataset <- function(data, catalog=load_catalog()) {
   if(any(!data$consumo$mes %in% 1:12)) add("Error","consumo","mes","Mes fuera de rango")
   if(any(!data$consumo$reporte_completo %in% c(TRUE,FALSE))) add("Error","consumo","reporte","Reporte completo debe ser TRUE o FALSE")
   if(any(data$consumo$dias_observados<1 | data$consumo$dias_observados>31,na.rm=TRUE)) add("Error","consumo","dias","Dias observados entre 1 y 31")
+  if(any(!as.character(data$eventos$dosis_id) %in% entry_options(catalog)$dosis_id)) add("Error","eventos","dosis_desconocida","Dosis no incluida en cat_opciones; utilizar el codigo documentado")
+  if(any(data$plan_mejora$avance>100,na.rm=TRUE)) add("Error","plan_mejora","avance","Avance debe expresarse de 0 a 100")
   if (!nrow(data$personas)) add("Aviso","personas","sin_nominal","Sin registro nominal: oportunidad y esquema completo no disponibles")
   if (!nrow(issues)) add("Correcto","general","validacion_ok","Contrato de datos verificado")
   issues

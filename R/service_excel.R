@@ -16,7 +16,7 @@ coerce_dataset <- function(data) {
   dates<-c("fecha_corte","fecha_nacimiento","fecha","inicio","fin","fecha_saldo","vencimiento","fecha_limite")
   for(table in names(data)) {
     x<-data[[table]]
-    for(col in intersect(nums,names(x))) x[[col]]<-suppressWarnings(as.numeric(x[[col]]))
+    for(col in intersect(setdiff(nums,if(table=="plan_mejora") "meta" else character()),names(x))) x[[col]]<-suppressWarnings(as.numeric(x[[col]]))
     for(col in intersect(dates,names(x))) x[[col]]<-parse_date(x[[col]])
     if("cuarentena" %in% names(x)) x$cuarentena<-ifelse(toupper(as.character(x$cuarentena)) %in% c("TRUE","VERDADERO","1"),TRUE,ifelse(toupper(as.character(x$cuarentena)) %in% c("FALSE","FALSO","0"),FALSE,NA))
     if("reporte_completo" %in% names(x)) x$reporte_completo<-ifelse(toupper(as.character(x$reporte_completo)) %in% c("TRUE","1","VERDADERO"),TRUE,ifelse(toupper(as.character(x$reporte_completo)) %in% c("FALSE","0","FALSO"),FALSE,NA))
@@ -62,10 +62,16 @@ style_workbook <- function(wb,sheet,nrows,ncols,input=FALSE) {
 #' @param path Archivo de salida.
 #' @param example Incluir datos simulados completos.
 #' @param dataset Datos privados a guardar, o NULL para una plantilla.
+#' @param territories Distritos elegidos para precargar una plantilla vacia, o NULL.
 #' @return Ruta del archivo generado, invisiblemente.
 #' @export
-write_template <- function(path,example=FALSE,dataset=NULL) {
+write_template <- function(path,example=FALSE,dataset=NULL,territories=NULL) {
   d<-dataset %||% if(example) demo_dataset() else empty_dataset()
+  if(!is.null(territories)) {
+    if(example || !is.null(dataset)) stop("Seleccion territorial solo para plantillas vacias",call.=FALSE)
+    assert_columns(territories,data_schema()$territorios)
+    d$territorios<-territories[data_schema()$territorios]
+  }
   wb<-openxlsx::createWorkbook(creator="Sala situacional de inmunizaciones")
   openxlsx::modifyBaseFont(wb,fontName="Arial",fontSize=10)
   instructions<-data.frame(tema=c("Uso","Celdas editables","Ejemplo","Identificadores","Poblacion","Dosis","Nominal","Inventario","Presentaciones","Programacion","Privacidad","Norma"),
@@ -87,15 +93,16 @@ write_template <- function(path,example=FALSE,dataset=NULL) {
     openxlsx::addWorksheet(wb,n);openxlsx::writeData(wb,n,d[[n]],keepNA=FALSE)
     style_workbook(wb,n,nrow(d[[n]]),ncol(d[[n]]),input=TRUE)
     for(j in seq_along(d[[n]])) if(inherits(d[[n]][[j]],"Date") && nrow(d[[n]])) openxlsx::addStyle(wb,n,openxlsx::createStyle(numFmt="yyyy-mm-dd",fontName="Arial"),rows=2:(nrow(d[[n]])+1),cols=j,stack=TRUE)
-    if(n=="programacion") for(col in c("meta","perdida")) openxlsx::dataValidation(wb,n,cols=match(col,names(d[[n]])),rows=2:5000,type="decimal",operator="between",value=c(0,if(col=="perdida") .9999 else 1))
-    if(n=="vacunacion") openxlsx::dataValidation(wb,n,cols=match("estado_reporte",names(d[[n]])),rows=2:5000,type="list",value='"completo,pendiente"')
+
   }
   examples<-demo_dataset();examples<-do.call(rbind,lapply(names(examples),function(n) data.frame(tabla=n,ejemplo=if(nrow(examples[[n]])) paste(names(examples[[n]]),as.character(examples[[n]][1,]),sep="=",collapse=" | ") else "Hoja opcional sin ejemplo")))
   openxlsx::addWorksheet(wb,"ejemplos");openxlsx::writeData(wb,"ejemplos",examples);style_workbook(wb,"ejemplos",nrow(examples),2)
-  cata<-load_catalog()
-  for(n in c("productos","reglas","grupos","fuentes")) {
-    sheet<-paste0("cat_",n);openxlsx::addWorksheet(wb,sheet);openxlsx::writeData(wb,sheet,cata[[n]]);style_workbook(wb,sheet,nrow(cata[[n]]),ncol(cata[[n]]))
-  }
+  add_catalogue_sheets(wb)
+  add_input_controls(wb,d)
+  openxlsx::writeData(wb,"instrucciones",data.frame(tema=c("Listas de entrada","Catalogo territorial","Diccionario"),
+    indicacion=c("Desplegables hasta la fila 5001: codigos, sexo, ruta, estrategia, estado y movimientos. La validacion R sigue siendo obligatoria.",
+      paste("cat_territorios: distritos reales de mapsPERU",utils::packageVersion("mapsPERU"),"; seleccionelos en Mi proyecto para precargar nombres."),
+      "Consultar diccionario: una fila por variable y hoja, tipos, ejemplos, obligatoriedad y valores permitidos.")),startRow=15,colNames=FALSE)
   save_sala_workbook(wb,path);invisible(path)
 }
 export_aggregates <- function(path,tables) {

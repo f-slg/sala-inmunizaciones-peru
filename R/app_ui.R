@@ -16,8 +16,8 @@ app_ui <- function(request) {
       bslib::nav_panel("Programaci\u00f3n",mod_logistics_ui("logistics")),
       bslib::nav_panel("Inventario",mod_inventory_ui("inventory")),
       bslib::nav_panel("Calidad",mod_table_ui("quality","Calidad y completitud","Errores estructurales bloquean la carga. Alertas analiticas requieren interpretacion.")),
-      bslib::nav_panel("Norma",shiny::tagList(mod_table_ui("products","Catalogo de productos","Incluye vacunas, antecedentes y anticuerpo monoclonal. Presentaciones logisticas deben documentarse por producto real."),mod_table_ui("rules","Reglas y trazabilidad","Verificada: transcripcion de referencia. Condicional o revision clinica: no se automatiza. Tolerancia de oportunidad de 30 dias es un parametro pedagogico, no un umbral normativo universal."),mod_table_ui("fichas","Fichas t\u00e9cnicas de indicadores"),mod_table_ui("sources","Fuentes"))),
+      bslib::nav_panel("Norma",shiny::tagList(mod_table_ui("products","Catalogo de productos","Incluye vacunas, antecedentes y anticuerpo monoclonal. Presentaciones logisticas deben documentarse por producto real."),mod_table_ui("rules","Reglas y trazabilidad","Verificada: transcripcion de referencia. Condicional o revision clinica: no se automatiza. Tolerancia de oportunidad de 30 dias es un parametro pedagogico, no un umbral normativo universal."),mod_table_ui("fichas","Fichas t\u00e9cnicas de indicadores"),mod_table_ui("variables","Diccionario de variables"),mod_table_ui("sources","Fuentes"))),
       bslib::nav_panel("Plan de mejora",mod_plan_ui("plan",public)),
       bslib::nav_panel("Informe",mod_reports_ui("reports")),
-      footer=shiny::div(class="app-footer","salainmunizaciones 0.1.0 \u00b7 Proyecto educativo reproducible \u00b7 Linux / Windows / macOS")))
+      footer=shiny::div(class="app-footer","salainmunizaciones 0.2.0 \u00b7 Proyecto educativo reproducible \u00b7 Linux / Windows / macOS")))
 }

@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: "Salas Guerrero"
     given-names: "Ronald Fabricio"
-version: 0.1.0
+version: 0.2.0
 license: MIT
 repository-code: "https://github.com/f-slg/sala-inmunizaciones-peru"
 url: "https://github.com/f-slg/sala-inmunizaciones-peru"

@@ -1,3 +1,12 @@
+# salainmunizaciones 0.2.0
+
+- Selector nacional de departamento, provincia y distritos con vista previa cartografica.
+- Seleccion de varios ambitos y descarga de plantillas territoriales sin inventar datos sanitarios.
+- Diccionario de los 96 campos del contrato, con tipos, unidades, requisitos y ejemplos.
+- Desplegables estandar OOXML mediante rangos nombrados, sin macros ni formulas volatiles.
+- Catalogo territorial de mapsPERU incorporado a las plantillas.
+- Las metas descriptivas del plan de mejora se conservan como texto al importar.
+
 # salainmunizaciones 0.1.0
 
 - Aplicación modular Shiny/golem con 13 paneles y proyecto individual por alumno.

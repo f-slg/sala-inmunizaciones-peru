@@ -47,9 +47,10 @@ app_server <- function(input,output,session) {
   })
   mod_table_server("quality",quality_analytical)
   mod_table_server("products",shiny::reactive(catalog$productos));mod_table_server("rules",shiny::reactive(catalog$reglas));mod_table_server("sources",shiny::reactive(catalog$fuentes))
+  mod_table_server("variables",shiny::reactive(variable_dictionary(catalog)))
   mod_table_server("fichas",shiny::reactive(indicator_specs()))
   mod_plan_server("plan",state,public)
-  tables<-shiny::reactive(list(resumen=coverage_summary(coverage()),coberturas=coverage(),poblacion=population(),necesidades=requirements(),consumo=consumption(),inventario=stock(),cadena_frio=capacity(),calidad=quality_analytical(),plan_mejora=data_scope()$plan_mejora,configuracion=state()$configuracion,trazabilidad=data.frame(version_app="0.1.0",huella_md5=dataset_fingerprint(state()),corte_administrativo=paste(filters()$year,filters()$month,sep="-"),fecha_corte_nominal=as.character(filters()$cutoff)),fichas_tecnicas=indicator_specs(),fuentes=catalog$fuentes))
+  tables<-shiny::reactive(list(resumen=coverage_summary(coverage()),coberturas=coverage(),poblacion=population(),necesidades=requirements(),consumo=consumption(),inventario=stock(),cadena_frio=capacity(),calidad=quality_analytical(),plan_mejora=data_scope()$plan_mejora,configuracion=state()$configuracion,trazabilidad=data.frame(version_app="0.2.0",huella_md5=dataset_fingerprint(state()),corte_administrativo=paste(filters()$year,filters()$month,sep="-"),fecha_corte_nominal=as.character(filters()$cutoff)),fichas_tecnicas=indicator_specs(),fuentes=catalog$fuentes))
   mod_reports_server("reports",tables,state,filters)
   # Returned handles are private to the R session and enable integration tests.
   invisible(list(state=state,filters=filters,coverage=coverage,assessment=assessment,requirements=requirements,tables=tables))

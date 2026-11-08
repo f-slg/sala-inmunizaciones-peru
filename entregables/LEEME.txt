@@ -9,3 +9,7 @@ Vista_resumen.png / Vista_mapa.png / Vista_movil.png: comprobacion visual en nav
 Cada alumno conserva una copia del proyecto y guarda su libro privado.
 Linux, Windows y macOS aprobados en GitHub Actions con R 4.6.2: 97 comprobaciones por sistema.
 Resultado: https://github.com/f-slg/sala-inmunizaciones-peru/actions/runs/42478929001
+
+Version 0.2.0: plantillas con listas desplegables, catalogo nacional y hoja diccionario.
+Diccionario_variables.xlsx: definiciones y codigos de los 96 campos por hoja.
+Mi proyecto permite elegir departamento, provincia y distritos de varias regiones.

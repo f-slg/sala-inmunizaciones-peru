@@ -1,7 +1,7 @@
 # Demonstration has REAL INEI territories and exclusively SIMULATED health data.
 demo_dataset <- function(catalog=load_catalog()) {
   d<-empty_dataset();year<-2026L;cutoff<-as.Date("2026-11-08")
-  d$configuracion<-data.frame(alumno="Estudiante de demostracion",ambito="Angaraes - ejercicio simulado",anio=year,fecha_corte=cutoff,fuente="SIMULADO - no representa situacion sanitaria real",version_datos="demo-0.1.0")
+  d$configuracion<-data.frame(alumno="Estudiante de demostracion",ambito="Angaraes - ejercicio simulado",anio=year,fecha_corte=cutoff,fuente="SIMULADO - no representa situacion sanitaria real",version_datos="demo-0.2.0")
   d$territorios<-data.frame(ubigeo=c("090301","090302","090303"),distrito=c("Lircay","Anchonga","Callanmarca"),provincia="Angaraes",departamento="Huancavelica")
   d$poblacion<-expand.grid(anio=year,ubigeo=d$territorios$ubigeo,grupo_id=catalog$grupos$grupo_id,stringsAsFactors=FALSE)
   d$poblacion$poblacion<-rep(c(120L,85L,65L),length.out=nrow(d$poblacion))

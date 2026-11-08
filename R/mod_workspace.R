@@ -9,12 +9,15 @@ mod_workspace_ui <- function(id,public=FALSE) {
       module_card("Datos y plantillas",
         if(!public) shiny::fileInput(ns("upload"),"Cargar libro XLSX",accept=".xlsx") else shiny::p("Modo publico: consulta agregada. Carga y registro nominal deshabilitados."),
         shiny::downloadButton(ns("template"),"Plantilla vacia"),shiny::downloadButton(ns("example"),"Libro de demostracion"),
+        shiny::downloadButton(ns("catalogue"),"Diccionario y catalogos"),
         if(!public) shiny::tagList(shiny::actionButton(ns("demo"),"Restaurar demostracion"),shiny::downloadButton(ns("snapshot"),"Guardar proyecto privado (incluye nominal)")))),
+    mod_territory_picker_ui(ns("territory")),
     mod_table_ui(ns("validation"),"Resultado de validacion","Los errores bloquean la carga completa. Se conservan los datos anteriores."),
     mod_table_ui(ns("summary"),"Contenido del proyecto")
   )
 }
 mod_workspace_server <- function(id,state,catalog,public=FALSE) shiny::moduleServer(id,function(input,output,session) {
+  mod_territory_picker_server("territory")
   issues<-shiny::reactiveVal(validate_dataset(shiny::isolate(state()),catalog))
   shiny::observe({d<-state();shiny::updateTextInput(session,"alumno",value=d$configuracion$alumno[1]);shiny::updateTextInput(session,"ambito",value=d$configuracion$ambito[1])})
   shiny::observeEvent(input$save,{
@@ -30,6 +33,7 @@ mod_workspace_server <- function(id,state,catalog,public=FALSE) shiny::moduleSer
   })
   shiny::observeEvent(input$demo,{if(!public) {state(demo_dataset(catalog));issues(validate_dataset(state(),catalog))}})
   output$snapshot<-shiny::downloadHandler(filename=function() "Mi_proyecto_privado.xlsx",content=function(file) {shiny::req(!public);write_template(file,dataset=state())})
+  output$catalogue<-shiny::downloadHandler(filename=function() "Diccionario_variables.xlsx",content=function(file) write_catalogue(file))
   output$template<-shiny::downloadHandler(filename=function() "Plantilla_sala_inmunizaciones.xlsx",content=function(file) write_template(file))
   output$example<-shiny::downloadHandler(filename=function() "Demostracion_sala_inmunizaciones.xlsx",content=function(file) write_template(file,TRUE))
   mod_table_server("validation",issues)

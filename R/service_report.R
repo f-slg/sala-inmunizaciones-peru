@@ -13,7 +13,7 @@ report_html <- function(tables,config,filters,catalog=load_catalog()) {
       htmltools::tags$p(paste("Alumno:",config$alumno[1],"\u00b7 Ambito:",config$ambito[1])),
       htmltools::tags$p(paste("Fuente:",config$fuente[1],"\u00b7 Version de datos:",config$version_datos[1])),
       htmltools::tags$p(sprintf("Corte administrativo: %02d/%d \u00b7 Corte nominal/inventario: %s \u00b7 Regla: %s",filters$month,filters$year,filters$cutoff,filters$rule)),
-      htmltools::tags$p(paste("Generado:",format(Sys.time(),"%Y-%m-%d %H:%M:%S %Z"),"\u00b7 salainmunizaciones 0.1.0")),
+      htmltools::tags$p(paste("Generado:",format(Sys.time(),"%Y-%m-%d %H:%M:%S %Z"),"\u00b7 salainmunizaciones 0.2.0")),
       htmltools::tags$p("Meta de lectura administrativa: 95 %. Fuentes poblacionales por grupo. Reportes incompletos no se convierten en cero. Programacion: parametros propios del horizonte declarado. Existencias que vencen dentro del horizonte excluidas conservadoramente. Revisar alternativas y grupos superpuestos antes de totalizar pedidos."),
       parts,htmltools::tags$h2("Fuentes y alcance normativo"),tab(catalog$fuentes),
       htmltools::tags$p("Reglas especiales y condicionales requieren revision documentada. Las reglas de oportunidad incluyen una tolerancia pedagogica configurable de 30 dias, no una certificacion de oportunidad normativa. La evaluacion de fechas no sustituye la revision clinica. El informe no contiene registros nominales.")))

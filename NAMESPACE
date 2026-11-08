@@ -2,4 +2,6 @@
 
 export(import_workbook)
 export(run_app)
+export(write_catalogue)
+export(write_population_template)
 export(write_template)

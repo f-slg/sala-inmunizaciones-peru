@@ -4,7 +4,7 @@
 \alias{write_template}
 \title{Crear plantilla de intercambio de datos}
 \usage{
-write_template(path, example = FALSE, dataset = NULL)
+write_template(path, example = FALSE, dataset = NULL, territories = NULL)
 }
 \arguments{
 \item{path}{Archivo de salida.}
@@ -12,6 +12,8 @@ write_template(path, example = FALSE, dataset = NULL)
 \item{example}{Incluir datos simulados completos.}
 
 \item{dataset}{Datos privados a guardar, o NULL para una plantilla.}
+
+\item{territories}{Distritos elegidos para precargar una plantilla vacia, o NULL.}
 }
 \value{
 Ruta del archivo generado, invisiblemente.

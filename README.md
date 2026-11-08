@@ -8,7 +8,7 @@ interprete y mantenga su propia sala situacional de inmunizaciones. Incluye
 población objetivo, coberturas, continuidad, seguimiento nominal, mapas reales,
 necesidad de dosis, inventario, insumos, cadena de frío y planes de mejora.
 
-**Versión inicial 0.1.0.** El catálogo incluye 33 productos y 116 reglas; 34
+**Versión inicial 0.2.0.** El catálogo incluye 33 productos y 116 reglas; 34
 reglas tienen evaluación nominal educativa automatizada. Los casos especiales,
 transiciones y lineamientos específicos requieren revisión documentada. Todos
 los datos publicados de demostración son **simulados**, aunque los distritos y
@@ -21,6 +21,8 @@ producto oficial del MINSA ni una certificación clínica.
 
 - [Qué permite hacer](#qué-permite-hacer)
 - [Instalar y ejecutar paso a paso](#instalar-y-ejecutar-paso-a-paso)
+- [Elegir cualquier ámbito incluido en la cartografía](#elegir-su-territorio)
+- [Diccionario y listas desplegables](#diccionario-y-listas-desplegables)
 - [Primer ejercicio de 10 minutos](#primer-ejercicio-de-10-minutos)
 - [Usar su propia población y datos](#usar-su-propia-población-y-datos)
 - [Guardar el trabajo individual](#guardar-el-trabajo-individual)
@@ -128,6 +130,60 @@ Si el ZIP creó una subcarpeta, entre en ella antes de ejecutar los comandos.
 En Posit Cloud los archivos se procesan en su proyecto en la nube: no es una
 sesión que se ejecute exclusivamente en su computadora.
 
+## Elegir su territorio
+
+La demostración inicial contiene tres distritos, pero **no limita la sala a esos
+lugares**. En **Mi proyecto → Seleccione su territorio en el Perú**:
+
+1. Seleccione departamento y provincia.
+2. Busque uno o varios distritos por nombre; los códigos mostrados son ubigeos INEI.
+3. Pulse **Agregar a mi selección**. Puede repetirlo con otras provincias o departamentos.
+4. Revise la lista y el mapa de contexto nacional. Los marcadores identifican los
+   distritos elegidos; la vista previa no contiene indicadores de salud.
+5. Descargue **Plantilla integral de mi territorio** o **Población de mi territorio**.
+   La hoja `territorios` ya contiene códigos y nombres; población y vacunación
+   permanecen vacías para ingresar sus fuentes propias.
+6. Complete las hojas necesarias y cargue el libro integral. Los filtros y el
+   mapa de indicadores usarán los territorios de ese archivo.
+
+El directorio tiene 1.891 distritos de `mapsPERU` 2.0.1, con representación de los
+24 departamentos y la Provincia Constitucional del Callao. No es un registro INEI actualizado en línea. Si un distrito
+nuevo no aparece, conserve su ubigeo INEI real en la plantilla; la lista de ubigeo
+muestra una advertencia que permite conservar el código verificado. El mapa
+avisará si no dispone de su geometría; nunca lo ubicará sobre otro distrito.
+
+## Diccionario y listas desplegables
+
+[Diccionario_variables.xlsx](entregables/Diccionario_variables.xlsx) documenta
+**96 campos por hoja**: definición, tipo, unidad, obligatoriedad, ejemplos y
+valores permitidos. La misma información está dentro de cada plantilla, en la
+hoja `diccionario`, y en **Norma** dentro de la aplicación.
+
+Las plantillas integral y de población contienen catálogos consultables y
+validaciones hasta la fila 5001 (o hasta la última fila si un libro ya contiene
+más registros):
+
+| Entrada | Ayuda disponible |
+|---|---|
+| Ubigeo | Lista nacional de códigos y catálogo con distrito, provincia y departamento. |
+| Grupo poblacional | `grupo_id` y definición del grupo. |
+| Vacuna/dosis/grupo | `regla_id`, con ficha y estado de revisión en `cat_reglas`. |
+| Producto físico | `producto_id`, separado de la dosis y de los antígenos. |
+| Dosis | `dosis_id`; comprobar también su correspondencia con producto y regla. |
+| Sexo y ruta | F/M/X/ND; penta_ipv/hexavalente/revision. |
+| Estrategia y reporte | regular/recuperacion/campana/bloqueo; completo/pendiente. |
+| Inventario y consumo | TRUE/FALSE para cuarentena y reporte completo. |
+| Movimiento | entrada/salida/aplicacion/perdida/ajustes. |
+| Conteos y proporciones | Controles numéricos; meta y pérdida 0–1, avance del plan 0–100. |
+
+Son listas estándar de Excel con rangos nombrados, sin macros ni fórmulas
+volátiles, compatibles con lectores que admiten validación OOXML. Los códigos
+se conservan como texto para proteger ceros iniciales. Copiar y pegar puede
+eludir validaciones de una hoja de cálculo: **la validación de R sigue siendo
+obligatoria** y los catálogos editados en Excel no modifican las reglas del paquete.
+La calculadora de necesidades se conserva como un recurso independiente; no es
+la plantilla de carga y sus fórmulas no se reemplazan por valores.
+
 ## Primer ejercicio de 10 minutos
 
 1. Abra la aplicación con los datos de demostración.
@@ -146,7 +202,7 @@ Lircay, Anchonga ni Callanmarca.
 
 ## Usar su propia población y datos
 
-1. En **Mi proyecto**, descargue **Plantilla vacía**. También está disponible
+1. En **Mi proyecto**, descargue **Plantilla vacía** o prepare una plantilla de su territorio con el selector nacional. También está disponible
    [Plantilla_integral.xlsx](entregables/Plantilla_integral.xlsx).
 2. Complete `configuracion`: alumno, ámbito, año, fecha de corte, fuente y versión.
 3. Complete `territorios`: ubigeo INEI de seis dígitos, distrito, provincia y departamento.
@@ -395,12 +451,12 @@ entrega el catálogo 2026 y no reproduce automáticamente calendarios histórico
 
 ## Verificación
 
-**Resultado comprobado el 8 de noviembre de 2026:** Linux, Windows y macOS
-aprobaron la comprobación del paquete con **R 4.6.2 y 97 comprobaciones por sistema**,
-sin fallos, advertencias de pruebas ni omisiones.
-[Ver la ejecución](https://github.com/f-slg/sala-inmunizaciones-peru/actions/runs/42478929001).
-La comprobación local adicional se realizó con R 4.5.2 en Linux. El badge refleja
-el estado del flujo; estos resultados no certifican elegibilidad clínica.
+**Versión 0.2.0:** comprobación local en Linux con R 4.5.2 y 139
+comprobaciones aprobadas, sin fallos, advertencias ni omisiones. `R CMD check`: OK.
+La matriz de esta actualización se ejecuta al publicar.
+La versión 0.1.0 ya aprobó Linux, Windows y macOS con R 4.6.2
+([ejecución anterior](https://github.com/f-slg/sala-inmunizaciones-peru/actions/runs/42478929001)).
+Estos resultados no certifican elegibilidad clínica.
 
 
 ```r
@@ -410,7 +466,7 @@ testthat::test_local(".")
 
 ```text
 R CMD build .
-R CMD check --no-manual salainmunizaciones_0.1.0.tar.gz
+R CMD check --no-manual salainmunizaciones_0.2.0.tar.gz
 ```
 
 Las pruebas comprueban resultados numéricos y casos adversos: denominadores
