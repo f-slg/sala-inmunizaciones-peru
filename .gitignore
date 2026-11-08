@@ -26,7 +26,7 @@ resultados_locales/
 *.xls
 *.csv
 *.zip
-# Only curated, simulated resources and the four reviewed workbooks are public.
+# Only curated, simulated resources and the five reviewed workbooks are public.
 !inst/extdata/*.csv
 !inst/extdata/legado/*.csv
 !entregables/Plantilla_integral.xlsx
@@ -34,3 +34,6 @@ resultados_locales/
 !entregables/Demostracion_integral.xlsx
 !entregables/Calculadora_necesidades.xlsx
 !entregables/Diccionario_variables.xlsx
+
+# Optional documentation generator dependencies
+node_modules/

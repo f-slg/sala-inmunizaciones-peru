@@ -19,6 +19,7 @@ producto oficial del MINSA ni una certificación clínica.
 
 ## Contenido
 
+- [Manuales paso a paso](#manuales-paso-a-paso)
 - [Qué permite hacer](#qué-permite-hacer)
 - [Instalar y ejecutar paso a paso](#instalar-y-ejecutar-paso-a-paso)
 - [Elegir cualquier ámbito incluido en la cartografía](#elegir-su-territorio)
@@ -33,6 +34,19 @@ producto oficial del MINSA ni una certificación clínica.
 - [Mapas reales](#mapas-reales)
 - [Problemas frecuentes](#problemas-frecuentes)
 - [Pruebas y contribuciones](#verificación)
+
+## Manuales paso a paso
+
+- **Uso (15 páginas):** [PDF](docs/manuales/Manual_de_uso.pdf),
+  [Word editable](docs/manuales/Manual_de_uso.docx), [lectura en GitHub](docs/manuales/Manual_de_uso.md).
+  Instalación, selección territorial, plantillas, carga, indicadores, logística y entrega individual.
+- **Construcción técnica (17 páginas):** [PDF](docs/manuales/Manual_tecnico_construccion.pdf),
+  [Word editable](docs/manuales/Manual_tecnico_construccion.docx),
+  [lectura en GitHub](docs/manuales/Manual_tecnico_construccion.md).
+  Arquitectura golem, contrato, validación, cálculos, mapas, módulos, pruebas y extensiones.
+
+Los ejemplos ejecutables se contrastaron con la versión 0.2.0. Consulte
+[la guía de materiales](docs/manuales/README.md) para regenerar los Word.
 
 ## Qué permite hacer
 
