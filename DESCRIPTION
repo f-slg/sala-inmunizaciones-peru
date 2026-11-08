@@ -1,0 +1,18 @@
+Package: salainmunizaciones
+Title: Sala Situacional Integral de Inmunizaciones del Peru
+Version: 0.1.0
+Authors@R: person("Ronald Fabricio", "Salas Guerrero", role=c("aut","cre"), email="fabriciosalasguerrero@gmail.com")
+Description: Aplicacion educativa modular Shiny y golem para analisis de
+    coberturas, seguimiento nominal, programacion de vacunas, inventarios y
+    planes de mejora. Reglas normativas versionadas, validacion transaccional
+    de datos y exportaciones agregadas. Compatible con Linux, Windows y macOS.
+URL: https://github.com/f-slg/sala-inmunizaciones-peru
+BugReports: https://github.com/f-slg/sala-inmunizaciones-peru/issues
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends: R (>= 4.2.0)
+Imports: shiny, golem, config, bslib, DT, ggplot2, openxlsx, readxl,
+    htmltools, jsonlite, lubridate, leaflet, sf, mapsPERU
+Suggests: testthat (>= 3.0.0), pkgload, roxygen2, rsconnect
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.1

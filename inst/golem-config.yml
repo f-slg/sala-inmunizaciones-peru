@@ -1,0 +1,9 @@
+default:
+  golem_name: salainmunizaciones
+  golem_version: 0.1.0
+  app_prod: false
+  public_mode: false
+  max_upload_mb: 30
+production:
+  app_prod: true
+  public_mode: true

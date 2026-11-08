@@ -1,0 +1,10 @@
+ABRIR PRIMERO: ../README.md
+
+Plantilla_integral.xlsx: contrato completo, instrucciones y ejemplos separados.
+Plantilla_poblacion.xlsx: hoja complementaria de denominadores.
+Demostracion_integral.xlsx: todos los datos son simulados; distritos reales.
+Calculadora_necesidades.xlsx: formulas editables, escenarios y supuestos.
+Vista_resumen.png / Vista_mapa.png / Vista_movil.png: comprobacion visual en navegador.
+
+Cada alumno conserva una copia del proyecto y guarda su libro privado.
+Linux comprobado localmente; Windows y macOS incluidos en el flujo de CI, aun sin ejecutar aqui.

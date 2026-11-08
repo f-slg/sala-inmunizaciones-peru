@@ -1,0 +1,22 @@
+grupo_id,nombre,edad_min_meses,edad_max_meses_exclusiva,solapamiento
+RN,Recien nacidos,0,1,No sumar grupos: pueden superponerse
+M1,Menores de 1 ano,0,12,No sumar grupos: pueden superponerse
+A1,Un ano,12,24,No sumar grupos: pueden superponerse
+A2,Dos anos,24,36,No sumar grupos: pueden superponerse
+A3,Tres anos,36,48,No sumar grupos: pueden superponerse
+A4,Cuatro anos,48,60,No sumar grupos: pueden superponerse
+VPH9_18,Nueve a dieciocho anos,108,228,No sumar grupos: pueden superponerse
+ADO,Adolescentes 12 a 17,144,216,No sumar grupos: pueden superponerse
+JOV,Jovenes 18 a 29,216,360,No sumar grupos: pueden superponerse
+ADU,Adultos 30 a 59,360,720,No sumar grupos: pueden superponerse
+AM,Adultos mayores,720,1560,No sumar grupos: pueden superponerse
+GEST,Gestantes,0,1560,No sumar grupos: pueden superponerse
+VIH,Personas con VIH,0,1560,No sumar grupos: pueden superponerse
+COMORB,Personas con comorbilidad,0,1560,No sumar grupos: pueden superponerse
+SALUD,Personal de salud,216,1560,No sumar grupos: pueden superponerse
+BROTE,Elegibles segun brote,0,1560,No sumar grupos: pueden superponerse
+ESPECIAL,Elegibles con indicacion documentada,0,1560,No sumar grupos: pueden superponerse
+COVID,Elegibles COVID segun lineamiento,0,1560,No sumar grupos: pueden superponerse
+MPOX,Elegibles mpox segun lineamiento,0,1560,No sumar grupos: pueden superponerse
+DENGUE,Elegibles dengue segun lineamiento,0,1560,No sumar grupos: pueden superponerse
+RABIA,Elegibles antirrabica segun lineamiento,0,1560,No sumar grupos: pueden superponerse

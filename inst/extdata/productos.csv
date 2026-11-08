@@ -1,0 +1,34 @@
+producto_id,nombre,tipo,antigenos,via,fuente_id,pagina,observacion
+BCG,BCG,vacuna,TB,ID,NTS246,13,Verificar presentacion del producto efectivamente disponible
+HVB_PED,Hepatitis B pediatrica,vacuna,HVB,IM,NTS246,14,Verificar presentacion del producto efectivamente disponible
+HVB_AD,Hepatitis B adulto,vacuna,HVB,IM,NTS246,14,Verificar presentacion del producto efectivamente disponible
+HEXA,Hexavalente celular,vacuna,DIF|TET|PER|HVB|HIB|POLIO,IM,NTS246,16,Verificar presentacion del producto efectivamente disponible
+PENTA,Pentavalente,vacuna,DIF|TET|PER|HVB|HIB,IM,NTS246,17,Verificar presentacion del producto efectivamente disponible
+DT_PED,DT pediatrico,vacuna,DIF|TET,IM,NTS246,19,Verificar presentacion del producto efectivamente disponible
+HIB,Haemophilus influenzae b,vacuna,HIB,IM,NTS246,20,Verificar presentacion del producto efectivamente disponible
+IPV,Polio inactivada,vacuna,POLIO,IM,NTS246,21,Verificar presentacion del producto efectivamente disponible
+APO,Polio oral,vacuna,POLIO,ORAL,NTS246,22,Verificar presentacion del producto efectivamente disponible
+ROTA,Rotavirus,vacuna,ROTA,ORAL,NTS246,23,Verificar presentacion del producto efectivamente disponible
+PCV20,Neumococo conjugada 20 valente,vacuna,NEUMO,IM,NTS246,24,Verificar presentacion del producto efectivamente disponible
+PCV13,Neumococo conjugada 13 valente - antecedente,vacuna,NEUMO,IM,NTS246,24,Verificar presentacion del producto efectivamente disponible
+SPR,Sarampion paperas rubeola,vacuna,SAR|PAR|RUB,SC,NTS246,25,Verificar presentacion del producto efectivamente disponible
+SR,Sarampion rubeola,vacuna,SAR|RUB,SC,NTS246,27,Verificar presentacion del producto efectivamente disponible
+VAR,Varicela,vacuna,VAR,SC,NTS246,28,Verificar presentacion del producto efectivamente disponible
+AMA,Fiebre amarilla,vacuna,AMA,SC,NTS246,29,Verificar presentacion del producto efectivamente disponible
+DPT,Difteria pertussis tetanos,vacuna,DIF|PER|TET,IM,NTS246,31,Verificar presentacion del producto efectivamente disponible
+DT_AD,dT adulto,vacuna,DIF|TET,IM,NTS246,32,Verificar presentacion del producto efectivamente disponible
+TDAP,Tdap,vacuna,DIF|TET|PER,IM,NTS246,33,Verificar presentacion del producto efectivamente disponible
+HVA,Hepatitis A,vacuna,HVA,IM,NTS246,34,Verificar presentacion del producto efectivamente disponible
+VPH9,VPH nonavalente,vacuna,VPH,IM,NTS246,35,Verificar presentacion del producto efectivamente disponible
+VPH4,VPH tetravalente - antecedente,vacuna,VPH,IM,NTS246,35,Verificar presentacion del producto efectivamente disponible
+FLU_PED,Influenza pediatrica,vacuna,FLU,IM,NTS246,37,Verificar presentacion del producto efectivamente disponible
+FLU_AD,Influenza adulto,vacuna,FLU,IM,NTS246,37,Verificar presentacion del producto efectivamente disponible
+VRS_MAT,VRS materna,vacuna,VRS,IM,NTS246,39,Verificar presentacion del producto efectivamente disponible
+HEXA_A,Hexavalente acelular,vacuna,DIF|TET|PER|HVB|HIB|POLIO,IM,NTS246,40,Verificar presentacion del producto efectivamente disponible
+MENACWY,Meningococo ACWY,vacuna,MEN,IM,NTS246,42,Verificar presentacion del producto efectivamente disponible
+NIRSE50,Nirsevimab 50 mg,anticuerpo,VRS,IM,NTS246,43,Verificar presentacion del producto efectivamente disponible
+NIRSE100,Nirsevimab 100 mg,anticuerpo,VRS,IM,NTS246,43,Verificar presentacion del producto efectivamente disponible
+COVID,COVID-19 - especificar formulacion,vacuna,COVID,IM,NTS246,13,Lineamiento especifico: no automatizar elegibilidad
+MPOX,Mpox,vacuna,MPOX,SC,NTS246,13,Lineamiento especifico: no automatizar elegibilidad
+DENGUE,Dengue,vacuna,DENGUE,SC,NTS246,13,Lineamiento especifico: no automatizar elegibilidad
+RABIA,Antirrabica humana,vacuna,RABIA,IM,NTS246,13,Lineamiento especifico: no automatizar elegibilidad

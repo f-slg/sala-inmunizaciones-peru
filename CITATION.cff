@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Si utiliza este software, cite el repositorio y la versión utilizada."
+title: "Sala situacional de inmunizaciones del Perú"
+type: software
+authors:
+  - family-names: "Salas Guerrero"
+    given-names: "Ronald Fabricio"
+version: 0.1.0
+license: MIT
+repository-code: "https://github.com/f-slg/sala-inmunizaciones-peru"
+url: "https://github.com/f-slg/sala-inmunizaciones-peru"

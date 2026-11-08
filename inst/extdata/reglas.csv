@@ -1,0 +1,117 @@
+regla_id,producto_id,dosis_id,nombre,ruta_id,grupo_id,edad_objetivo_meses,edad_min_meses,edad_max_meses_exclusiva,previa_id,intervalo_min_dias,tolerancia_oportunidad_dias,repeticion,elegibilidad,estado,vigente_desde,vigente_hasta,fuente_id,pagina,observacion
+BCG_RN,BCG,U,BCG U,todas,RN,0,0,12,,0,1,una_vez,edad,verificada,2026-06-13,,NTS246,45,Rescate mayor de 1 ano requiere evaluacion y PPD; fuera del motor automatico
+HVB_RN,HVB_PED,RN,HVB_PED RN,todas,RN,0,0,1,,0,1,una_vez,edad,verificada,2026-06-13,,NTS246,45,Control de oportunidad en horas requiere hora de nacimiento y aplicacion; fechas solas no certifican 12/24 horas
+PENTA_1,PENTA,1,PENTA 1,penta_ipv,M1,2,2,84,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,Ruta declarada por responsable; transicion condicionada a disponibilidad local
+PENTA_2,PENTA,2,PENTA 2,penta_ipv,M1,4,4,84,PENTA_1,28,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,Ruta declarada por responsable; transicion condicionada a disponibilidad local
+PENTA_3,PENTA,3,PENTA 3,penta_ipv,M1,6,6,84,PENTA_2,28,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,Ruta declarada por responsable; transicion condicionada a disponibilidad local
+HEXA_1,HEXA,1,HEXA 1,hexavalente,M1,2,2,84,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,Ruta declarada por responsable; transicion condicionada a disponibilidad local
+HEXA_2,HEXA,2,HEXA 2,hexavalente,M1,4,4,84,HEXA_1,28,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,Ruta declarada por responsable; transicion condicionada a disponibilidad local
+HEXA_3,HEXA,3,HEXA 3,hexavalente,M1,6,6,84,HEXA_2,28,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,Ruta declarada por responsable; transicion condicionada a disponibilidad local
+IPV_1,IPV,1,IPV 1,penta_ipv,M1,2,2,84,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+IPV_2,IPV,2,IPV 2,penta_ipv,M1,4,4,84,IPV_1,28,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+IPV_3,IPV,3,IPV 3,penta_ipv,M1,6,6,84,IPV_2,28,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+ROTA_1,ROTA,1,ROTA 1,todas,M1,2,2,8.001,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,Limite: 8 meses cero dias; calculo exacto mediante meses calendario
+ROTA_2,ROTA,2,ROTA 2,todas,M1,4,4,8.001,ROTA_1,28,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,Limite: 8 meses cero dias; calculo exacto mediante meses calendario
+PCV_1,PCV20,1,PCV20 1,todas,M1,2,2,60,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,Rescates segun edad e historial requieren revision individual
+PCV_2,PCV20,2,PCV20 2,todas,M1,4,4,60,PCV_1,28,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,Rescates segun edad e historial requieren revision individual
+PCV_3,PCV20,3,PCV20 3,todas,A1,12,12,60,PCV_2,28,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,Rescates segun edad e historial requieren revision individual
+FLU_1,FLU_PED,1,FLU_PED 1,todas,M1,6,6,12,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+FLU_2,FLU_PED,2,FLU_PED 2,todas,M1,7,7,12,FLU_1,28,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+FLU_A1,FLU_PED,A1,FLU_PED A1,todas,A1,12,12,24,,0,30,anual,edad,verificada,2026-06-13,,NTS246,46,Una dosis por ano; la edad define el grupo y presentacion
+FLU_A2,FLU_PED,A2,FLU_PED A2,todas,A2,24,24,36,,0,30,anual,edad,verificada,2026-06-13,,NTS246,46,Una dosis por ano; la edad define el grupo y presentacion
+FLU_A3,FLU_AD,A3,FLU_AD A3,todas,A3,36,36,48,,0,30,anual,edad,verificada,2026-06-13,,NTS246,46,Una dosis por ano; la edad define el grupo y presentacion
+FLU_A4,FLU_AD,A4,FLU_AD A4,todas,A4,48,48,60,,0,30,anual,edad,verificada,2026-06-13,,NTS246,46,Una dosis por ano; la edad define el grupo y presentacion
+SPR_1,SPR,1,SPR 1,todas,A1,12,12,60,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+SPR_2,SPR,2,SPR 2,todas,A1,18,18,60,SPR_1,28,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+VAR_1,VAR,1,VAR 1,todas,A1,12,12,60,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+VAR_2,VAR,2,VAR 2,todas,A2,24,24,60,VAR_1,28,30,una_vez,edad,condicional,2026-06-13,,NTS246,46,Incorporacion progresiva: activar tras verificar implementacion local
+AMA_U,AMA,U,AMA U,todas,A1,15,15,720,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+HVA_U,HVA,U,HVA U,todas,A1,15,15,60,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+DPT_R1,DPT,R1,DPT R1,penta_ipv,A1,18,18,84,PENTA_3,180,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+IPV_R1,IPV,R1,IPV R1,penta_ipv,A1,18,18,84,IPV_3,180,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+HEXA_R1,HEXA,R1,HEXA R1,hexavalente,A1,18,18,84,HEXA_3,180,30,una_vez,edad,condicional,2026-06-13,,NTS246,46,Tabla 6.2 y anexo 2 presentan transicion: confirmar implementacion; anexo menciona 2027
+DPT_R2_penta_ipv,DPT,R2,DPT R2,penta_ipv,A4,48,48,84,DPT_R1,180,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+DPT_R2_hexavalente,DPT,R2,DPT R2,hexavalente,A4,48,48,84,HEXA_R1,180,30,una_vez,edad,condicional,2026-06-13,,NTS246,46,
+APO_R2,APO,R2,APO R2,penta_ipv,A4,48,48,60,IPV_R1,180,30,una_vez,edad,verificada,2026-06-13,,NTS246,46,
+VPH_U,VPH9,U,VPH9 U,todas,VPH9_18,108,108,228,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,36,9 a 18 anos; VIH e inmunocompromiso requieren esquema especial
+PCV_AM,PCV20,U,PCV20 U,todas,AM,720,720,1560,,0,30,una_vez,edad,verificada,2026-06-13,,NTS246,48,
+FLU_AM,FLU_AD,ANUAL,FLU_AD ANUAL,todas,AM,720,720,1560,,0,30,anual,grupo,verificada,2026-06-13,,NTS246,48,Requiere pertenencia nominal AM documentada
+FLU_ADO,FLU_AD,ANUAL,FLU_AD ANUAL,todas,ADO,0,0,1560,,0,30,anual,grupo,revision_clinica,2026-06-13,,NTS246,37,"Validar grupo de riesgo, edad y formulacion antes de activar"
+FLU_JOV,FLU_AD,ANUAL,FLU_AD ANUAL,todas,JOV,0,0,1560,,0,30,anual,grupo,revision_clinica,2026-06-13,,NTS246,37,"Validar grupo de riesgo, edad y formulacion antes de activar"
+FLU_ADU,FLU_AD,ANUAL,FLU_AD ANUAL,todas,ADU,0,0,1560,,0,30,anual,grupo,revision_clinica,2026-06-13,,NTS246,37,"Validar grupo de riesgo, edad y formulacion antes de activar"
+FLU_COMORB,FLU_AD,ANUAL,FLU_AD ANUAL,todas,COMORB,0,0,1560,,0,30,anual,grupo,revision_clinica,2026-06-13,,NTS246,37,"Validar grupo de riesgo, edad y formulacion antes de activar"
+FLU_SALUD,FLU_AD,ANUAL,FLU_AD ANUAL,todas,SALUD,0,0,1560,,0,30,anual,grupo,revision_clinica,2026-06-13,,NTS246,37,"Validar grupo de riesgo, edad y formulacion antes de activar"
+FLU_GEST,FLU_AD,ANUAL,FLU_AD ANUAL,todas,GEST,0,0,1560,,0,30,anual,grupo,revision_clinica,2026-06-13,,NTS246,37,"Validar grupo de riesgo, edad y formulacion antes de activar"
+TDAP_GEST,TDAP,GEST,TDAP GEST,todas,GEST,0,0,1560,,0,30,episodio,grupo,revision_clinica,2026-06-13,,NTS246,45,20 a 36 semanas; requiere episodio gestacional y semanas verificadas
+VRS_GEST,VRS_MAT,GEST,VRS_MAT GEST,todas,GEST,0,0,1560,,0,30,episodio,grupo,revision_clinica,2026-06-13,,NTS246,45,32 a 36 semanas y periodo estacional; requiere validacion obstetrica
+DT_AD_ADO_1,DT_AD,1,DT_AD 1,todas,ADO,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_ADO_1,HVB_AD,1,HVB_AD 1,todas,ADO,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_ADO_2,DT_AD,2,DT_AD 2,todas,ADO,0,0,1560,DT_AD_ADO_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_ADO_2,HVB_AD,2,HVB_AD 2,todas,ADO,0,0,1560,HVB_AD_ADO_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_ADO_3,DT_AD,3,DT_AD 3,todas,ADO,0,0,1560,DT_AD_ADO_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_ADO_3,HVB_AD,3,HVB_AD 3,todas,ADO,0,0,1560,HVB_AD_ADO_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_JOV_1,DT_AD,1,DT_AD 1,todas,JOV,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_JOV_1,HVB_AD,1,HVB_AD 1,todas,JOV,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_JOV_2,DT_AD,2,DT_AD 2,todas,JOV,0,0,1560,DT_AD_JOV_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_JOV_2,HVB_AD,2,HVB_AD 2,todas,JOV,0,0,1560,HVB_AD_JOV_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_JOV_3,DT_AD,3,DT_AD 3,todas,JOV,0,0,1560,DT_AD_JOV_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_JOV_3,HVB_AD,3,HVB_AD 3,todas,JOV,0,0,1560,HVB_AD_JOV_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_ADU_1,DT_AD,1,DT_AD 1,todas,ADU,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_ADU_1,HVB_AD,1,HVB_AD 1,todas,ADU,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_ADU_2,DT_AD,2,DT_AD 2,todas,ADU,0,0,1560,DT_AD_ADU_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_ADU_2,HVB_AD,2,HVB_AD 2,todas,ADU,0,0,1560,HVB_AD_ADU_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_ADU_3,DT_AD,3,DT_AD 3,todas,ADU,0,0,1560,DT_AD_ADU_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_ADU_3,HVB_AD,3,HVB_AD 3,todas,ADU,0,0,1560,HVB_AD_ADU_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_GEST_1,DT_AD,1,DT_AD 1,todas,GEST,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,45,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_GEST_1,HVB_AD,1,HVB_AD 1,todas,GEST,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,45,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_GEST_2,DT_AD,2,DT_AD 2,todas,GEST,0,0,1560,DT_AD_GEST_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,45,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_GEST_2,HVB_AD,2,HVB_AD 2,todas,GEST,0,0,1560,HVB_AD_GEST_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,45,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_GEST_3,DT_AD,3,DT_AD 3,todas,GEST,0,0,1560,DT_AD_GEST_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,45,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_GEST_3,HVB_AD,3,HVB_AD 3,todas,GEST,0,0,1560,HVB_AD_GEST_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,45,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_VIH_1,DT_AD,1,DT_AD 1,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_VIH_1,HVB_AD,1,HVB_AD 1,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_VIH_2,DT_AD,2,DT_AD 2,todas,VIH,0,0,1560,DT_AD_VIH_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_VIH_2,HVB_AD,2,HVB_AD 2,todas,VIH,0,0,1560,HVB_AD_VIH_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_VIH_3,DT_AD,3,DT_AD 3,todas,VIH,0,0,1560,DT_AD_VIH_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_VIH_3,HVB_AD,3,HVB_AD 3,todas,VIH,0,0,1560,HVB_AD_VIH_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_SALUD_1,DT_AD,1,DT_AD 1,todas,SALUD,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_SALUD_1,HVB_AD,1,HVB_AD 1,todas,SALUD,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_SALUD_2,DT_AD,2,DT_AD 2,todas,SALUD,0,0,1560,DT_AD_SALUD_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_SALUD_2,HVB_AD,2,HVB_AD 2,todas,SALUD,0,0,1560,HVB_AD_SALUD_1,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_AD_SALUD_3,DT_AD,3,DT_AD 3,todas,SALUD,0,0,1560,DT_AD_SALUD_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+HVB_AD_SALUD_3,HVB_AD,3,HVB_AD 3,todas,SALUD,0,0,1560,HVB_AD_SALUD_2,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Rescate segun antecedente y grupo: no asumir esquema nuevo ni reiniciar
+DT_PED_ESPECIAL_1,DT_PED,1,DT_PED 1,todas,ESPECIAL,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,19,Alternativa por reaccion a combinadas: indicacion medica
+DT_PED_ESPECIAL_2,DT_PED,2,DT_PED 2,todas,ESPECIAL,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,19,Alternativa por reaccion a combinadas: indicacion medica
+DT_PED_ESPECIAL_3,DT_PED,3,DT_PED 3,todas,ESPECIAL,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,19,Alternativa por reaccion a combinadas: indicacion medica
+HIB_ESPECIAL_1,HIB,1,HIB 1,todas,ESPECIAL,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,20,Indicacion segun RAM y caso especial
+HIB_ESPECIAL_2,HIB,2,HIB 2,todas,ESPECIAL,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,20,Indicacion segun RAM y caso especial
+HIB_ESPECIAL_R1,HIB,R1,HIB R1,todas,ESPECIAL,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,20,Indicacion segun RAM y caso especial
+HIB_ESPECIAL_R2,HIB,R2,HIB R2,todas,ESPECIAL,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,20,Indicacion segun RAM y caso especial
+HEXA_A_VIH_1,HEXA_A,1,HEXA_A 1,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,48,Ruta especial y evaluacion clinica
+HEXA_A_VIH_2,HEXA_A,2,HEXA_A 2,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,48,Ruta especial y evaluacion clinica
+HEXA_A_VIH_3,HEXA_A,3,HEXA_A 3,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,48,Ruta especial y evaluacion clinica
+HEXA_A_VIH_R1,HEXA_A,R1,HEXA_A R1,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,48,Ruta especial y evaluacion clinica
+PCV20_VIH_1,PCV20,1,PCV20 1,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,48,Esquema especial 3+1
+PCV20_VIH_2,PCV20,2,PCV20 2,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,48,Esquema especial 3+1
+PCV20_VIH_3,PCV20,3,PCV20 3,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,48,Esquema especial 3+1
+PCV20_VIH_4,PCV20,4,PCV20 4,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,48,Esquema especial 3+1
+MENACWY_VIH_1,MENACWY,1,MENACWY 1,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,49,13 y 15 meses en esquema especial
+MENACWY_VIH_2,MENACWY,2,MENACWY 2,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,49,13 y 15 meses en esquema especial
+VPH9_VIH_1,VPH9,1,VPH9 1,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,49,Esquema de tres dosis con intervalos propios
+VPH9_VIH_2,VPH9,2,VPH9 2,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,49,Esquema de tres dosis con intervalos propios
+VPH9_VIH_3,VPH9,3,VPH9 3,todas,VIH,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,49,Esquema de tres dosis con intervalos propios
+PCV20_COMORB_U,PCV20,U,PCV20 U,todas,COMORB,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,24,5 a 59 anos con condiciones elegibles
+SPR_BROTE_U,SPR,U,SPR U,todas,BROTE,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,"Segun antecedente, edad y escenario epidemiologico"
+SR_BROTE_U,SR,U,SR U,todas,BROTE,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,"Segun antecedente, edad y escenario epidemiologico"
+TDAP_BROTE_U,TDAP,U,TDAP U,todas,BROTE,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,47,Brote de tos ferina; poblacion definida por lineamiento
+NIRSE50_ESPECIAL_U,NIRSE50,U,NIRSE50 U,todas,ESPECIAL,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,44,"Madre no vacunada VRS, estacionalidad y peso <5 kg; validar"
+NIRSE100_ESPECIAL_U,NIRSE100,U,NIRSE100 U,todas,ESPECIAL,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,44,"Peso, edad, proteccion materna y estacionalidad; validar"
+COVID_COVID_1,COVID,1,COVID 1,todas,COVID,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,13,Requiere lineamiento especifico y formulacion
+COVID_COVID_2,COVID,2,COVID 2,todas,COVID,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,13,Requiere lineamiento especifico y formulacion
+COVID_COVID_REF,COVID,REF,COVID REF,todas,COVID,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,13,Requiere lineamiento especifico y formulacion
+MPOX_MPOX_1,MPOX,1,MPOX 1,todas,MPOX,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,13,Requiere lineamiento especifico
+MPOX_MPOX_2,MPOX,2,MPOX 2,todas,MPOX,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,13,Requiere lineamiento especifico
+DENGUE_DENGUE_1,DENGUE,1,DENGUE 1,todas,DENGUE,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,13,Requiere lineamiento y ambito de implementacion
+DENGUE_DENGUE_2,DENGUE,2,DENGUE 2,todas,DENGUE,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,13,Requiere lineamiento y ambito de implementacion
+RABIA_RABIA_PRE,RABIA,PRE,RABIA PRE,todas,RABIA,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,13,Profilaxis requiere evaluacion individual; no genera prescripcion
+RABIA_RABIA_POST,RABIA,POST,RABIA POST,todas,RABIA,0,0,1560,,0,30,una_vez,grupo,revision_clinica,2026-06-13,,NTS246,13,Profilaxis requiere evaluacion individual; no genera prescripcion

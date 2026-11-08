@@ -1,0 +1,51 @@
+{
+  "version": "0.1.0",
+  "fecha": "2026-11-08",
+  "sistema_verificado": "Linux / Ubuntu 26.04.1",
+  "R": "4.5.2",
+  "R_CMD_check": "OK",
+  "pruebas": {
+    "aprobadas": 97,
+    "fallos": 0,
+    "advertencias": 0,
+    "omitidas": 0
+  },
+  "excel": {
+    "formulas_recalculadas": 1433,
+    "errores": 0,
+    "relaciones_OOXML_sin_destino": 0
+  },
+  "navegador": {
+    "javascript_errors": 0,
+    "poligonos_demo": 3,
+    "paneles_comprobados": 13,
+    "ancho_escritorio": 1600,
+    "ancho_movil": 390
+  },
+  "catalogo": {
+    "productos": 33,
+    "reglas": 116,
+    "reglas_verificadas": 34,
+    "otras_reglas": "Condicionales o revision clinica; no se automatiza elegibilidad"
+  },
+  "portabilidad": "CI configurada para Linux, Windows y macOS. Windows y macOS no ejecutados en esta sesion.",
+  "fuentes_oficiales": [
+    {
+      "url": "https://cdn.www.gob.pe/uploads/document/file/10154198/8265031-nts-n-246-minsa-digiesp-2026-parte-1.pdf?v=1781371017",
+      "sha256": "c5b99b342967d8d0820ac2427fc4551bf435a8a9ba40a9894bf7b93784ecd6b4"
+    },
+    {
+      "url": "https://cdn.www.gob.pe/uploads/document/file/10154199/8265031-nts-n-246-minsa-digiesp-2026-parte-2.pdf?v=1781371017",
+      "sha256": "544ade98a970e3f4e1cfcc852f30dca1f9dcbbdfecc3e0dd2b2afec01c5d0569"
+    }
+  ],
+  "revision_publicacion": {
+    "repositorio": "f-slg/sala-inmunizaciones-peru",
+    "inventario": "Saldos conciliados unidos por ubigeo, producto y lote",
+    "arranque": "Siempre carga la copia del proyecto abierta",
+    "filtros": "Conservados al editar identificacion o plan",
+    "proteccion_git": "Archivos privados ignorados; cuatro libros de distribucion permitidos",
+    "datos_publicados": "Valores del libro iguales al generador simulado",
+    "credenciales_y_rutas_personales": "Sin coincidencias en archivos preparados"
+  }
+}
