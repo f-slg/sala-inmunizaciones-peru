@@ -10,6 +10,8 @@ mod_workspace_ui <- function(id,public=FALSE) {
         if(!public) shiny::fileInput(ns("upload"),"Cargar libro XLSX",accept=".xlsx") else shiny::p("Modo publico: consulta agregada. Carga y registro nominal deshabilitados."),
         shiny::downloadButton(ns("template"),"Plantilla vacia"),shiny::downloadButton(ns("example"),"Libro de demostracion"),
         shiny::downloadButton(ns("catalogue"),"Diccionario y catalogos"),
+        shiny::downloadButton(ns("unit02_file"),"Base del caso Unidad 02 (simulada)"),
+        if(!public) shiny::actionButton(ns("unit02"),"Cargar caso Unidad 02 (simulado)",class="btn-outline-primary"),
         if(!public) shiny::tagList(shiny::actionButton(ns("demo"),"Restaurar demostracion"),shiny::downloadButton(ns("snapshot"),"Guardar proyecto privado (incluye nominal)")))),
     mod_territory_picker_ui(ns("territory")),
     mod_table_ui(ns("validation"),"Resultado de validacion","Los errores bloquean la carga completa. Se conservan los datos anteriores."),
@@ -32,6 +34,8 @@ mod_workspace_server <- function(id,state,catalog,public=FALSE) shiny::moduleSer
     else shiny::showNotification("Carga rechazada. Revise el informe de validacion.",type="error",duration=8)
   })
   shiny::observeEvent(input$demo,{if(!public) {state(demo_dataset(catalog));issues(validate_dataset(state(),catalog))}})
+  shiny::observeEvent(input$unit02,{if(!public) {state(unit02_dataset());issues(validate_dataset(state(),catalog));shiny::showNotification("Caso simulado cargado: ocho distritos, cierre diciembre 2026. Revise Priorizacion.",type="message",duration=10)}})
+  output$unit02_file<-shiny::downloadHandler(filename=function() "Caso_Unidad02_8_distritos.xlsx",content=function(file) write_template(file,dataset=unit02_dataset()))
   output$snapshot<-shiny::downloadHandler(filename=function() "Mi_proyecto_privado.xlsx",content=function(file) {shiny::req(!public);write_template(file,dataset=state())})
   output$catalogue<-shiny::downloadHandler(filename=function() "Diccionario_variables.xlsx",content=function(file) write_catalogue(file))
   output$template<-shiny::downloadHandler(filename=function() "Plantilla_sala_inmunizaciones.xlsx",content=function(file) write_template(file))

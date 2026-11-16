@@ -8,7 +8,7 @@ interprete y mantenga su propia sala situacional de inmunizaciones. Incluye
 población objetivo, coberturas, continuidad, seguimiento nominal, mapas reales,
 necesidad de dosis, inventario, insumos, cadena de frío y planes de mejora.
 
-**Versión inicial 0.2.0.** El catálogo incluye 33 productos y 116 reglas; 34
+**Versión 0.3.0.** El catálogo incluye 33 productos y 116 reglas; 34
 reglas tienen evaluación nominal educativa automatizada. Los casos especiales,
 transiciones y lineamientos específicos requieren revisión documentada. Todos
 los datos publicados de demostración son **simulados**, aunque los distritos y
@@ -49,6 +49,44 @@ Los ejemplos ejecutables se contrastaron con la versión 0.2.0. Consulte
 [la guía de materiales](docs/manuales/README.md) para regenerar los Word.
 
 ## Qué permite hacer
+
+### Caso de la Unidad 02: ocho distritos
+
+En **Mi proyecto**, pulse **Cargar caso Unidad 02 (simulado)** o cargue
+[Caso_Unidad02_8_distritos.xlsx](entregables/Caso_Unidad02_8_distritos.xlsx).
+Use **2026**, cierre **diciembre**, **PENTA_3** y los ocho distritos. El corte
+inicial se ajusta al último mes cerrado de la fecha del proyecto.
+
+La base reconstruye el enunciado con datos inventados: coberturas de 62 a 98 %,
+cuatro deserciones Penta 1–Penta 3 mayores a 10 %, tres distritos dispersos de
+difícil acceso, dos con alta falta de seguimiento y uno con antecedente de brote.
+Contiene 288 reportes mensuales enteros. Los nombres y ubigeos son reales; las
+cifras y las condiciones sanitarias asignadas son **simuladas**. No es la base
+original del aula virtual. No contiene registros individuales de niños.
+
+En **Priorización**, indique los cupos del presupuesto (tres por defecto).
+El orden pedagógico propuesto considera primero el antecedente de brote,
+después menor cobertura Penta 3, mayor deserción, difícil acceso, mayor
+proporción sin seguimiento y ubigeo para desempatar. Se explica cada distrito
+y se conserva el seguimiento regular de los demás. Este criterio es una
+propuesta explícita para debatir en el ejercicio, no una escala oficial.
+Con los supuestos incluidos propone Ccochaccasa, Lircay y Anchonga.
+
+La hoja opcional `contexto_territorial` agrega año, ubigeo, dispersión, acceso,
+total del padrón, niños sin seguimiento, clasificación alta de la fuente,
+antecedente de brote de tos ferina, corte, fuente y versión. Solo se utiliza
+contexto fechado hasta el cierre administrativo. La clasificación «alta» se
+ingresa desde la fuente; no se inventa un umbral universal. Los conteos del
+padrón son agregados y no equivalen a niños sin vacunar. Si faltan reportes o
+contexto de un distrito, se suspende el orden hasta completar el ámbito.
+Los libros anteriores siguen siendo compatibles sin esta hoja; la versión
+0.2.0 lee las cuatro hojas básicas del caso e ignora el contexto adicional.
+
+Los semáforos tienen texto además del color: cobertura roja <80 %, amarilla
+80 a <95 %, verde 95 a 100 %, azul >100 % para revisar y gris sin dato.
+Deserción roja >10 %, verde 0 a 10 % y azul cuando es negativa. Son cortes de
+visualización educativa. Calidad, inventario y riesgos logísticos también
+señalan errores, avisos y condiciones favorables sin depender solo del color.
 
 | Necesidad | Producto de la aplicación |
 |---|---|
@@ -168,10 +206,12 @@ avisará si no dispone de su geometría; nunca lo ubicará sobre otro distrito.
 
 ## Diccionario y listas desplegables
 
-[Diccionario_variables.xlsx](entregables/Diccionario_variables.xlsx) documenta
-**96 entradas de variables, identificadas por hoja**: definición, tipo, unidad, obligatoriedad, ejemplos y
-valores permitidos. La misma información está dentro de cada plantilla, en la
-hoja `diccionario`, y en **Norma** dentro de la aplicación.
+El diccionario generado por la versión 0.3.0 documenta **107 entradas de
+variables, identificadas por hoja**: definición, tipo, unidad, obligatoriedad,
+ejemplos y valores permitidos. Se descarga en **Mi proyecto**, se incluye en
+las nuevas plantillas y se consulta en **Norma**. El
+[diccionario distribuido con la versión 0.2.0](entregables/Diccionario_variables.xlsx)
+conserva las 96 entradas originales; no contiene el nuevo contexto territorial.
 
 Las plantillas integral y de población contienen catálogos consultables y
 validaciones hasta la fila 5001 (o hasta la última fila si un libro ya contiene
@@ -480,7 +520,7 @@ testthat::test_local(".")
 
 ```text
 R CMD build .
-R CMD check --no-manual salainmunizaciones_0.2.0.tar.gz
+R CMD check --no-manual salainmunizaciones_0.3.0.tar.gz
 ```
 
 Las pruebas comprueban resultados numéricos y casos adversos: denominadores

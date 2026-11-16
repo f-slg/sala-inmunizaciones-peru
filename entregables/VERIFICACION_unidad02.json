@@ -1,0 +1,41 @@
+{
+  "version": "0.3.0",
+  "fecha": "2026-11-16",
+  "datos": "SIMULADOS; reconstruccion del enunciado, no base original del aula virtual",
+  "distritos": 8,
+  "reportes_mensuales": 288,
+  "cobertura_penta3_min": 62,
+  "cobertura_penta3_max": 98,
+  "distritos_desercion_mayor_10": 4,
+  "dispersion_y_dificil_acceso": 3,
+  "alta_falta_seguimiento": 2,
+  "antecedente_brote_tosferina": 1,
+  "presupuesto_distritos": 3,
+  "orden_pedagogico": [
+    "Ccochaccasa",
+    "Lircay",
+    "Anchonga"
+  ],
+  "pruebas_locales": {
+    "aprobadas": 188,
+    "fallos": 0,
+    "errores": 0,
+    "advertencias": 0
+  },
+  "R_CMD_check": "Status: OK",
+  "R": "4.5.2",
+  "sistema": "Linux",
+  "importacion_excel": [
+    "0.2.0: OK",
+    "0.3.0: OK"
+  ],
+  "navegador": {
+    "carga_archivo_real": "OK",
+    "cierre_inicial_diciembre": "OK",
+    "cambio_cupos_3_2_3": "OK",
+    "errores_shiny_visibles": 0,
+    "escritorio_ancho": 1500,
+    "movil_ancho": 390
+  },
+  "xlsx_sha256": "f7e525a6e9125693e417d66576fda84263b832af98360b267fea3f02f0e5ebab"
+}

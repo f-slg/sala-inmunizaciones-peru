@@ -13,10 +13,15 @@ data_schema <- function() list(
   presentaciones=c("producto_id","dosis_frasco","volumen_cm3_dosis","jeringas_dosis","diluyentes_frasco","jeringas_reconstitucion_frasco","capacidad_caja","fuente"),
   consumo=c("anio","mes","ubigeo","producto_id","dosis_consumidas","dias_observados","dias_sin_stock","reporte_completo"),
   cadena_frio=c("ubigeo","capacidad_litros","ocupacion_otros_litros","fuente"),
-  plan_mejora=c("accion_id","ubigeo","problema","evidencia","accion","responsable","fecha_limite","indicador","meta","avance")
+  plan_mejora=c("accion_id","ubigeo","problema","evidencia","accion","responsable","fecha_limite","indicador","meta","avance"),
+  contexto_territorial=c("anio","ubigeo","poblacion_dispersa","dificil_acceso","ninos_padron","ninos_sin_seguimiento","alta_sin_seguimiento","brote_tosferina_ultimo_anio","fecha_corte","fuente","version")
 )
-optional_sheets <- function() c("personas","elegibilidad","eventos","programacion","inventario","movimientos","cadena_frio","presentaciones","consumo","plan_mejora")
+optional_sheets <- function() c("personas","elegibilidad","eventos","programacion","inventario","movimientos","cadena_frio","presentaciones","consumo","plan_mejora","contexto_territorial")
 empty_dataset <- function() lapply(data_schema(), empty_frame)
+complete_optional_tables <- function(data) {
+  for(n in optional_sheets()) if(is.null(data[[n]])) data[[n]]<-empty_dataset()[[n]]
+  data
+}
 # Population groups can overlap. Never add groups to obtain a unique population.
 population_groups <- function() read_resource_csv("grupos.csv")
 load_catalog <- function() {

@@ -27,4 +27,4 @@ dataset_fingerprint <- function(data) {
   unname(tools::md5sum(file))
 }
 
-utils::globalVariables(c("distrito","cobertura","alerta","producto_id","pedido_neto","mes","dosis"))
+utils::globalVariables(c("distrito","cobertura","alerta","semaforo_cobertura","producto_id","pedido_neto","mes","dosis"))
