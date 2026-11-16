@@ -76,3 +76,13 @@ test_that("Unit 02 loads through the workspace and priority is exported with the
     for(n in c("priority-reading","priority-ranking-table","overview-cards","coverage-plot","trends-plot","map-map","quality-table")) expect_no_error(output[[n]])
   })
 })
+test_that("opening Unit 02 selects the task dose and December without manual filters", {
+  traffic<-new.env(parent=emptyenv());traffic$messages<-list()
+  mock<-shiny::MockShinySession$new()
+  mock$sendInputMessage<-function(inputId,message) traffic$messages[[inputId]]<-message
+  shiny::testServer(mod_filters_server,session=mock,args=list(state=shiny::reactiveVal(unit02_dataset()),catalog=load_catalog()),{
+    session$flushReact()
+    expect_identical(traffic$messages$rule$value,"PENTA_3")
+    expect_equal(as.integer(traffic$messages$month$value),12L)
+  })
+})

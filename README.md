@@ -52,6 +52,16 @@ Los ejemplos ejecutables se contrastaron con la versión 0.2.0. Consulte
 
 ### Caso de la Unidad 02: ocho distritos
 
+Para abrir directamente el caso en RStudio, abra `salainmunizaciones.Rproj` y ejecute:
+
+```r
+source("dev/iniciar_unidad02.R")
+```
+
+El lanzador comprueba las dependencias, importa el libro editable de
+`entregables/` y abre la aplicación con los ocho distritos y cierre diciembre
+de 2026. Para detenerla, pulse **Stop** en RStudio.
+
 En **Mi proyecto**, pulse **Cargar caso Unidad 02 (simulado)** o cargue
 [Caso_Unidad02_8_distritos.xlsx](entregables/Caso_Unidad02_8_distritos.xlsx).
 Use **2026**, cierre **diciembre**, **PENTA_3** y los ocho distritos. El corte

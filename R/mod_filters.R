@@ -19,7 +19,7 @@ mod_filters_server <- function(id,state,catalog) shiny::moduleServer(id,function
     shiny::updateSelectInput(session,"units",choices=units,selected=unname(units))
     ids<-unique(d$vacunacion$regla_id);r<-catalog$reglas[match(ids,catalog$reglas$regla_id),]
     labels<-paste(r$regla_id,"\u00b7",catalog$productos$nombre[match(r$producto_id,catalog$productos$producto_id)])
-    shiny::updateSelectInput(session,"rule",choices=stats::setNames(ids,labels),selected=if("PCV_3" %in% ids) "PCV_3" else ids[1])
+    shiny::updateSelectInput(session,"rule",choices=stats::setNames(ids,labels),selected=if("PCV_3" %in% ids) "PCV_3" else if("PENTA_3" %in% ids) "PENTA_3" else ids[1])
     shiny::updateDateInput(session,"cutoff",value=d$configuracion$fecha_corte[1])
     date<-as.Date(d$configuracion$fecha_corte[1]);start<-as.Date(format(date,"%Y-%m-01"))
     closed<-as.integer(format(date,"%m"))-as.integer(date<add_months(start,1)-1)
