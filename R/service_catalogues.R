@@ -42,7 +42,7 @@ add_input_controls <- function(wb,data) {
       # Preserve leading zeros when a student types a code instead of using a list.
       openxlsx::addStyle(wb,sheet,openxlsx::createStyle(numFmt="@",fontName="Arial",fontColour="#1258A2"),rows=2:last,cols=match(field,names(x)),stack=TRUE)
     }
-    for(field in intersect(c("poblacion","dosis","poblacion_elegible","saldo_dosis","recuperacion","reserva_dosis","transito_dosis","mes","anio","dosis_frasco","capacidad_caja"),names(x))) {
+    for(field in intersect(c("poblacion","dosis","poblacion_elegible","saldo_dosis","recuperacion","reserva_dosis","transito_dosis","mes","anio","dosis_frasco","capacidad_caja","ninos_padron","ninos_sin_seguimiento"),names(x))) {
       lo<-if(field %in% c("poblacion","dosis_frasco","capacidad_caja","mes")) 1 else if(field=="anio") 1900 else 0
       hi<-if(field=="mes") 12 else if(field=="anio") 2200 else 1e9
       openxlsx::dataValidation(wb,sheet,cols=match(field,names(x)),rows=2:last,type="whole",operator="between",value=c(lo,hi))

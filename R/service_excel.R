@@ -12,7 +12,7 @@ parse_date <- function(x) {
   out
 }
 coerce_dataset <- function(data) {
-  nums<-c("anio","mes","poblacion","dosis","poblacion_elegible","meta","recuperacion","perdida","reserva_dosis","transito_dosis","dias_horizonte","dias_reposicion","saldo_dosis","capacidad_litros","ocupacion_otros_litros","dosis_frasco","volumen_cm3_dosis","jeringas_dosis","diluyentes_frasco","jeringas_reconstitucion_frasco","capacidad_caja","avance","dosis_consumidas","dias_observados","dias_sin_stock")
+  nums<-c("anio","mes","poblacion","dosis","poblacion_elegible","meta","recuperacion","perdida","reserva_dosis","transito_dosis","dias_horizonte","dias_reposicion","saldo_dosis","capacidad_litros","ocupacion_otros_litros","dosis_frasco","volumen_cm3_dosis","jeringas_dosis","diluyentes_frasco","jeringas_reconstitucion_frasco","capacidad_caja","avance","dosis_consumidas","dias_observados","dias_sin_stock","ninos_padron","ninos_sin_seguimiento")
   dates<-c("fecha_corte","fecha_nacimiento","fecha","inicio","fin","fecha_saldo","vencimiento","fecha_limite")
   for(table in names(data)) {
     x<-data[[table]]
@@ -20,6 +20,7 @@ coerce_dataset <- function(data) {
     for(col in intersect(dates,names(x))) x[[col]]<-parse_date(x[[col]])
     if("cuarentena" %in% names(x)) x$cuarentena<-ifelse(toupper(as.character(x$cuarentena)) %in% c("TRUE","VERDADERO","1"),TRUE,ifelse(toupper(as.character(x$cuarentena)) %in% c("FALSE","FALSO","0"),FALSE,NA))
     if("reporte_completo" %in% names(x)) x$reporte_completo<-ifelse(toupper(as.character(x$reporte_completo)) %in% c("TRUE","1","VERDADERO"),TRUE,ifelse(toupper(as.character(x$reporte_completo)) %in% c("FALSE","0","FALSO"),FALSE,NA))
+    for(col in intersect(c("poblacion_dispersa","dificil_acceso","alta_sin_seguimiento","brote_tosferina_ultimo_anio"),names(x))) x[[col]]<-ifelse(toupper(as.character(x[[col]])) %in% c("TRUE","1","VERDADERO"),TRUE,ifelse(toupper(as.character(x[[col]])) %in% c("FALSE","0","FALSO"),FALSE,NA))
     data[[table]]<-x
   }
   data

@@ -1,5 +1,6 @@
 # All-or-nothing ingestion: invalid uploads never replace the active dataset.
 validate_dataset <- function(data, catalog=load_catalog()) {
+  data<-complete_optional_tables(data)
   issues <- data.frame(nivel=character(), tabla=character(), codigo=character(), detalle=character())
   add <- function(level, table, code, text) {
     issues[nrow(issues)+1L,] <<- list(level,table,code,text)
@@ -13,7 +14,7 @@ validate_dataset <- function(data, catalog=load_catalog()) {
   if (any(issues$nivel=="Error")) return(issues)
   numeric_fields <- list(poblacion=c("anio","poblacion"),vacunacion=c("anio","mes","dosis"),
     programacion=c("anio","poblacion_elegible","meta","recuperacion","perdida","reserva_dosis","transito_dosis","dias_horizonte","dias_reposicion"),
-    plan_mejora="avance",
+    plan_mejora="avance",contexto_territorial=c("anio","ninos_padron","ninos_sin_seguimiento"),
     consumo=c("anio","mes","dosis_consumidas","dias_observados","dias_sin_stock"),
     presentaciones=c("dosis_frasco","volumen_cm3_dosis","jeringas_dosis","diluyentes_frasco","jeringas_reconstitucion_frasco","capacidad_caja"),
     inventario="saldo_dosis",movimientos="dosis",cadena_frio=c("capacidad_litros","ocupacion_otros_litros"))
@@ -25,7 +26,7 @@ validate_dataset <- function(data, catalog=load_catalog()) {
     if (any(bad)) add("Error",table,"numero_ausente",paste(col,": valor ausente o no numerico"))
     if (any(suppressWarnings(as.numeric(x)) < 0,na.rm=TRUE)) add("Error",table,"negativo",paste(col,": valores negativos"))
   }
-  keys <- list(consumo=c("anio","mes","ubigeo","producto_id"),territorios="ubigeo",poblacion=c("anio","ubigeo","grupo_id"),
+  keys <- list(contexto_territorial=c("anio","ubigeo"),consumo=c("anio","mes","ubigeo","producto_id"),territorios="ubigeo",poblacion=c("anio","ubigeo","grupo_id"),
     vacunacion=c("anio","mes","ubigeo","regla_id","estrategia"),personas="persona_id",eventos="evento_id",
     elegibilidad=c("persona_id","grupo_id","episodio_id","inicio"),programacion=c("anio","ubigeo","regla_id"),
     presentaciones="producto_id",inventario=c("ubigeo","producto_id","lote"),movimientos="movimiento_id",cadena_frio="ubigeo",plan_mejora="accion_id")
@@ -54,12 +55,19 @@ validate_dataset <- function(data, catalog=load_catalog()) {
     x <- data$programacion[[col]]
     if (any(x>1 | (col=="perdida" & x>=1),na.rm=TRUE)) add("Error","programacion","proporcion",paste(col,"debe expresarse entre 0 y 1; perdida < 1"))
   }
+  for(col in c("dosis_frasco","capacidad_caja")) if(any(data$presentaciones[[col]]!=floor(data$presentaciones[[col]]),na.rm=TRUE)) add("Error","presentaciones","entero",paste(col,"debe ser entero"))
+  for(col in c("anio","ninos_padron","ninos_sin_seguimiento")) {
+    x<-suppressWarnings(as.numeric(data$contexto_territorial[[col]]))
+    if(any(x!=floor(x),na.rm=TRUE)) add("Error","contexto_territorial","entero",paste(col,"debe ser entero"))
+  }
+  if(any(data$contexto_territorial$ninos_padron<=0 | data$contexto_territorial$ninos_sin_seguimiento>data$contexto_territorial$ninos_padron,na.rm=TRUE)) add("Error","contexto_territorial","padron","Padron positivo y sin seguimiento no mayor que el total")
+  for(col in c("poblacion_dispersa","dificil_acceso","alta_sin_seguimiento","brote_tosferina_ultimo_anio")) if(any(!data$contexto_territorial[[col]] %in% c(TRUE,FALSE))) add("Error","contexto_territorial","logico",paste(col,"debe ser TRUE o FALSE"))
   if (any(data$programacion$dias_horizonte<=0,na.rm=TRUE)) add("Error","programacion","horizonte","Horizonte debe ser positivo")
   if (any(!data$inventario$cuarentena %in% c(TRUE,FALSE))) add("Error","inventario","cuarentena","Cuarentena debe ser TRUE o FALSE")
   if (any(!data$movimientos$tipo %in% c("entrada","salida","aplicacion","perdida","ajuste_positivo","ajuste_negativo"))) add("Error","movimientos","tipo","Tipo de movimiento no reconocido")
   for (table in c("eventos","elegibilidad")) if (any(!data[[table]]$persona_id %in% data$personas$persona_id)) add("Error",table,"persona_ausente","Referencia a persona inexistente")
   for (table in c("eventos","inventario","movimientos")) if (any(!data[[table]]$producto_id %in% catalog$productos$producto_id)) add("Error",table,"producto_ausente","Producto desconocido")
-  dates <- list(configuracion="fecha_corte",personas="fecha_nacimiento",eventos="fecha",elegibilidad=c("inicio","fin"),inventario=c("fecha_saldo","vencimiento"),movimientos="fecha",plan_mejora="fecha_limite")
+  dates <- list(configuracion="fecha_corte",contexto_territorial="fecha_corte",personas="fecha_nacimiento",eventos="fecha",elegibilidad=c("inicio","fin"),inventario=c("fecha_saldo","vencimiento"),movimientos="fecha",plan_mejora="fecha_limite")
   for (table in names(dates)) for (col in dates[[table]]) {
     x<-data[[table]][[col]]
     if (length(x) && anyNA(x)) add("Error",table,"fecha_ausente",paste("Fecha ausente:",col))
@@ -81,7 +89,7 @@ validate_dataset <- function(data, catalog=load_catalog()) {
   for(table in names(data)) {
     if(any(names(data[[table]]) %in% c("dni","documento","nombre","nombres","apellido","apellidos","telefono","direccion","correo","email"))) add("Error",table,"identificadores_directos","Retirar nombres, documentos y datos de contacto antes de cargar")
   }
-  for(table in c("configuracion","poblacion","programacion","presentaciones","cadena_frio")) for(col in intersect(c("fuente","version","version_datos","alumno","ambito"),names(data[[table]]))) {
+  for(table in c("configuracion","poblacion","programacion","presentaciones","cadena_frio","contexto_territorial")) for(col in intersect(c("fuente","version","version_datos","alumno","ambito"),names(data[[table]]))) {
     x<-data[[table]][[col]]
     if(any(is.na(x)|trimws(as.character(x))=="")) add("Error",table,"fuente_ausente",paste("Completar",col))
   }
@@ -93,6 +101,8 @@ validate_dataset <- function(data, catalog=load_catalog()) {
   if(nrow(data$programacion)) {
     prods<-catalog$reglas$producto_id[match(data$programacion$regla_id,catalog$reglas$regla_id)]
     if(any(!prods %in% data$presentaciones$producto_id)) add("Error","programacion","sin_presentacion","Falta presentacion documentada para un producto programado")
+    groups<-split(data$programacion,paste(data$programacion$anio,data$programacion$ubigeo,prods))
+    for(col in c("reserva_dosis","transito_dosis","dias_horizonte","dias_reposicion")) if(any(vapply(groups,function(x) length(unique(x[[col]]))>1L,logical(1)))) add("Error","programacion","parametros_producto",paste(col,"debe ser identico entre dosis del mismo producto, ano y territorio"))
   }
   if(nrow(data$movimientos)) {
     mi<-match(paste(data$movimientos$ubigeo,data$movimientos$producto_id,data$movimientos$lote),paste(data$inventario$ubigeo,data$inventario$producto_id,data$inventario$lote))

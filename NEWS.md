@@ -1,3 +1,14 @@
+# salainmunizaciones 0.3.0
+
+- Las coberturas conservan distritos sin ningun reporte de la dosis; no se excluyen del agregado ni del control de completitud.
+- Una seleccion territorial vacia tambien deja vacia la tendencia mensual.
+- La importacion rechaza frascos/cajas fraccionarios y parametros de producto inconsistentes antes de reemplazar datos.
+- Semaforos con texto para coberturas, desercion, calidad, inventario y riesgos logisticos.
+- Caso simulado de Unidad 02: ocho distritos, 288 reportes mensuales y contexto territorial agregado.
+- Hoja opcional contexto_territorial, con padron, seguimiento, dispersion, acceso y antecedente de brote.
+- Priorizacion con cupos editables, razones visibles, orden pedagogico explicito y bloqueo cuando faltan datos.
+- Cierre administrativo inicial segun el ultimo mes cerrado de la fecha del proyecto.
+
 # salainmunizaciones 0.2.0
 
 - Selector nacional de departamento, provincia y distritos con vista previa cartografica.

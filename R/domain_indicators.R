@@ -1,23 +1,28 @@
 # Administrative indicators retain report completeness; absence is never zero.
 coverage_table <- function(data, catalog=load_catalog(), year, month=12L, territories=NULL, strategies="regular") {
   v<-data$vacunacion
+  units<-if(is.null(territories)) data$territorios$ubigeo else territories
+  # Start from the expected scope, including districts with no report at all.
+  ids<-unique(v$regla_id[v$anio==year & v$estrategia %in% strategies])
+  if(!length(units)||!length(ids)) return(data.frame())
+  grid<-expand.grid(ubigeo=units,regla_id=ids,stringsAsFactors=FALSE)
   v<-v[v$anio==year & v$mes<=month & v$estrategia %in% strategies, ,drop=FALSE]
-  if (!is.null(territories)) v<-v[v$ubigeo %in% territories,,drop=FALSE]
-  if (!nrow(v)) return(data.frame())
-  parts<-split(v,paste(v$ubigeo,v$regla_id,sep="::"))
-  out<-lapply(parts,function(x) {
-    rule<-catalog$reglas[match(x$regla_id[1],catalog$reglas$regla_id),]
+  out<-lapply(seq_len(nrow(grid)),function(i) {
+    unit<-grid$ubigeo[i];id<-grid$regla_id[i]
+    x<-v[v$ubigeo==unit & v$regla_id==id,,drop=FALSE]
+    rule<-catalog$reglas[match(id,catalog$reglas$regla_id),]
     p<-data$poblacion
-    den<-p$poblacion[p$anio==year & p$ubigeo==x$ubigeo[1] & p$grupo_id==rule$grupo_id]
+    den<-p$poblacion[p$anio==year & p$ubigeo==unit & p$grupo_id==rule$grupo_id]
     if (length(den)>1L) stop("Denominador duplicado",call.=FALSE)
     den<-if(length(den)) den else NA_real_
-    complete<-all(x$estado_reporte=="completo") && all(is.finite(x$dosis)) && length(unique(x$mes))==month
+    complete<-nrow(x)==month*length(strategies) && all(x$estado_reporte=="completo") && all(is.finite(x$dosis)) && setequal(x$mes,seq_len(month))
     doses<-if (complete) sum(x$dosis) else NA_real_
     cob<-safe_pct(doses,den)
-    data.frame(anio=year,mes_corte=month,ubigeo=x$ubigeo[1],regla_id=rule$regla_id,producto_id=rule$producto_id,
+    data.frame(anio=year,mes_corte=month,ubigeo=unit,regla_id=rule$regla_id,producto_id=rule$producto_id,
       grupo_id=rule$grupo_id,dosis=doses,denominador=den,cobertura=cob,
       meses_reportados=length(unique(x$mes[x$estado_reporte=="completo"])),
       reporte_completo=complete,estado_regla=rule$estado,
+      semaforo_cobertura=coverage_status(cob),
       brecha_95=if(is.na(den)||is.na(doses)) NA_real_ else max(0,ceiling(den*.95)-doses),
       alerta=if(!complete) "Reporte incompleto" else if(is.na(cob)) "Sin denominador" else if(cob>100) "Revisar numerador y denominador" else if(cob>=95) "Meta alcanzada" else "Bajo la meta")
   })
@@ -39,13 +44,14 @@ dropout_table <- function(coverage, initial, final) {
   b<-coverage[coverage$regla_id==final,c("ubigeo","dosis")];names(b)[2]<-"dosis_final"
   x<-merge(a,b,by="ubigeo",all=TRUE)
   x$desercion<-safe_pct(x$dosis_inicial-x$dosis_final,x$dosis_inicial)
-  x$interpretacion<-ifelse(is.na(x$desercion),"No calculable",ifelse(x$desercion<0,"Desercion negativa: revisar comparabilidad",ifelse(x$desercion>=10,"Continuidad por mejorar","Bajo el umbral")))
+  x$semaforo_desercion<-dropout_status(x$desercion)
+  x$interpretacion<-ifelse(is.na(x$desercion),"No calculable",ifelse(x$desercion<0,"Desercion negativa: revisar comparabilidad",ifelse(x$desercion>10,"Continuidad por mejorar","Dentro del umbral de 10 %")))
   x
 }
 monthly_trend <- function(data, rule, year, territories=NULL) {
   x<-data$vacunacion
   x<-x[x$anio==year & x$regla_id==rule & x$estrategia=="regular",,drop=FALSE]
-  units<-territories %||% unique(data$poblacion$ubigeo[data$poblacion$anio==year])
+  units<-if(is.null(territories)) unique(data$poblacion$ubigeo[data$poblacion$anio==year]) else territories
   x<-x[x$ubigeo %in% units,,drop=FALSE]
   cumulative<-0
   out<-lapply(seq_len(12),function(m) {

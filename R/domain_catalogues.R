@@ -13,6 +13,8 @@ entry_options <- function(catalog=load_catalog()) list(
   estado_reporte=c("completo","pendiente"),cuarentena=c("FALSE","TRUE"),
   reporte_completo=c("TRUE","FALSE"),
   tipo=c("entrada","salida","aplicacion","perdida","ajuste_positivo","ajuste_negativo")
+  ,poblacion_dispersa=c("FALSE","TRUE"),dificil_acceso=c("FALSE","TRUE"),
+  alta_sin_seguimiento=c("FALSE","TRUE"),brote_tosferina_ultimo_anio=c("FALSE","TRUE")
 )
 # A dictionary entry is contextual: the same variable can have a different unit
 # or requirement depending on its sheet. Optional sheet != optional field.
@@ -83,12 +85,18 @@ variable_dictionary <- function(catalog=load_catalog()) {
     responsable="Responsable de ejecutar o supervisar la intervencion",
     fecha_limite="Fecha comprometida para cumplir la intervencion",
     indicador="Medida con la que se evaluara el cumplimiento",
-    avance="Avance de la intervencion de 0 a 100; no es una proporcion de 0 a 1"
+    avance="Avance de la intervencion de 0 a 100; no es una proporcion de 0 a 1",
+    poblacion_dispersa="TRUE si la fuente documenta poblacion dispersa en el distrito",
+    dificil_acceso="TRUE si la fuente documenta dificultad de acceso territorial",
+    ninos_padron="Total de ninos del padron usado para evaluar seguimiento en este distrito y corte",
+    ninos_sin_seguimiento="Ninos del padron sin seguimiento documentado; no equivale a personas sin vacunas",
+    alta_sin_seguimiento="Clasificacion alta de la fuente o del caso educativo; no se infiere un umbral universal",
+    brote_tosferina_ultimo_anio="TRUE si la fuente registra antecedente de brote de tos ferina en el ultimo ano del corte"
   )
-  numeric<-c("anio","mes","poblacion","dosis","poblacion_elegible","meta","recuperacion","perdida","reserva_dosis","transito_dosis","dias_horizonte","dias_reposicion","saldo_dosis","dosis_frasco","volumen_cm3_dosis","jeringas_dosis","diluyentes_frasco","jeringas_reconstitucion_frasco","capacidad_caja","dosis_consumidas","dias_observados","dias_sin_stock","capacidad_litros","ocupacion_otros_litros","avance")
+  numeric<-c("anio","mes","poblacion","dosis","poblacion_elegible","meta","recuperacion","perdida","reserva_dosis","transito_dosis","dias_horizonte","dias_reposicion","saldo_dosis","dosis_frasco","volumen_cm3_dosis","jeringas_dosis","diluyentes_frasco","jeringas_reconstitucion_frasco","capacidad_caja","dosis_consumidas","dias_observados","dias_sin_stock","capacidad_litros","ocupacion_otros_litros","avance","ninos_padron","ninos_sin_seguimiento")
   dates<-c("fecha_corte","fecha_nacimiento","inicio","fin","fecha","fecha_saldo","vencimiento","fecha_limite")
   decimal<-c("meta","perdida","volumen_cm3_dosis","jeringas_dosis","diluyentes_frasco","jeringas_reconstitucion_frasco","capacidad_litros","ocupacion_otros_litros","avance")
-  booleans<-c("cuarentena","reporte_completo")
+  booleans<-c("cuarentena","reporte_completo","poblacion_dispersa","dificil_acceso","alta_sin_seguimiento","brote_tosferina_ultimo_anio")
   out<-list();k<-0L
   for(sheet in names(schema)) for(field in schema[[sheet]]) {
     k<-k+1L;x<-examples[[sheet]][[field]]
@@ -96,6 +104,7 @@ variable_dictionary <- function(catalog=load_catalog()) {
       inicio="2026-01-01",fin="2026-12-31",episodio_id="EP-001",movimiento_id="MOV-001",tipo="entrada",fecha="2026-10-01",dosis="10",persona_id="SIM-0001",grupo_id="GEST","Ver instrucciones")
     desc<-definitions[[field]]
     if(sheet=="plan_mejora" && field=="meta") desc<-"Meta descriptiva verificable de la intervencion; texto, por ejemplo alcanzar 95 por ciento"
+    if(sheet=="contexto_territorial" && field=="fecha_corte") desc<-"Fecha hasta la cual la fuente describe el contexto; solo se utiliza si no es posterior al cierre administrativo"
     type<-if(field %in% dates) "Fecha AAAA-MM-DD" else if(field %in% booleans) "Logico TRUE/FALSE" else if(field %in% numeric && !(sheet=="plan_mejora"&&field=="meta")) if(field %in% decimal) "Numero decimal" else "Numero entero" else "Texto"
     allowed<-if(field=="ubigeo") "cat_territorios: codigo INEI de seis digitos" else if(field %in% names(opts)) paste(opts[[field]],collapse=" | ") else if(field %in% dates) "Fecha nativa Excel o AAAA-MM-DD" else if(type=="Numero entero") "Entero no negativo; poblacion, frasco y caja positivos" else "Ver definicion y validaciones"
     if(field=="regla_id") allowed<-"cat_reglas: columna regla_id; revisar ruta, dosis, grupo y estado"

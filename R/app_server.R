@@ -1,6 +1,6 @@
 app_server <- function(input,output,session) {
   catalog<-load_catalog();public<-isTRUE(golem::get_golem_options("public_mode"))
-  initial<-golem::get_golem_options("data") %||% demo_dataset(catalog)
+  initial<-complete_optional_tables(golem::get_golem_options("data") %||% demo_dataset(catalog))
   check<-validate_dataset(initial,catalog)
   if(any(check$nivel=="Error")) stop("Datos iniciales invalidos: ",paste(check$detalle[check$nivel=="Error"],collapse="; "))
   if(public) for(n in c("personas","eventos","elegibilidad")) initial[[n]]<-empty_dataset()[[n]]
@@ -29,6 +29,7 @@ app_server <- function(input,output,session) {
   population<-shiny::reactive({d<-data_scope();p<-d$poblacion;p[p$anio==filters()$year,,drop=FALSE]})
   output$source_banner<-shiny::renderUI({d<-state();shiny::div(class=if(grepl("SIMULADO",d$configuracion$fuente[1],ignore.case=TRUE)) "source-banner demo" else "source-banner",shiny::strong(d$configuracion$ambito[1]),shiny::span(paste(" \u00b7 ",d$configuracion$fuente[1]," \u00b7 ",if(public) "Modo publico" else "Sesion privada")))})
   mod_overview_server("overview",coverage,requirements,filters,state)
+  priority<-mod_priority_server("priority",state,filters,catalog)
   mod_table_server("population",population)
   mod_coverage_server("coverage",coverage,filters)
   mod_trends_server("trends",state,coverage,filters)
@@ -50,8 +51,8 @@ app_server <- function(input,output,session) {
   mod_table_server("variables",shiny::reactive(variable_dictionary(catalog)))
   mod_table_server("fichas",shiny::reactive(indicator_specs()))
   mod_plan_server("plan",state,public)
-  tables<-shiny::reactive(list(resumen=coverage_summary(coverage()),coberturas=coverage(),poblacion=population(),necesidades=requirements(),consumo=consumption(),inventario=stock(),cadena_frio=capacity(),calidad=quality_analytical(),plan_mejora=data_scope()$plan_mejora,configuracion=state()$configuracion,trazabilidad=data.frame(version_app="0.2.0",huella_md5=dataset_fingerprint(state()),corte_administrativo=paste(filters()$year,filters()$month,sep="-"),fecha_corte_nominal=as.character(filters()$cutoff)),fichas_tecnicas=indicator_specs(),fuentes=catalog$fuentes))
+  tables<-shiny::reactive(list(resumen=coverage_summary(coverage()),coberturas=coverage(),priorizacion=priority(),poblacion=population(),necesidades=requirements(),consumo=consumption(),inventario=stock(),cadena_frio=capacity(),calidad=quality_analytical(),plan_mejora=data_scope()$plan_mejora,configuracion=state()$configuracion,trazabilidad=data.frame(version_app=as.character(utils::packageVersion("salainmunizaciones")),huella_md5=dataset_fingerprint(state()),corte_administrativo=paste(filters()$year,filters()$month,sep="-"),fecha_corte_nominal=as.character(filters()$cutoff)),fichas_tecnicas=indicator_specs(),fuentes=catalog$fuentes))
   mod_reports_server("reports",tables,state,filters)
   # Returned handles are private to the R session and enable integration tests.
-  invisible(list(state=state,filters=filters,coverage=coverage,assessment=assessment,requirements=requirements,tables=tables))
+  invisible(list(state=state,filters=filters,coverage=coverage,assessment=assessment,requirements=requirements,priority=priority,tables=tables))
 }
